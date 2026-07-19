@@ -1,0 +1,78 @@
+# GoalSpec: look_for_loan
+# Equivalent to LookForLoanGoal.java (L2Obligation)
+# Activated when money drops below threshold and no active loan exists.
+# Contribution is modulated by the agent's emotional state (evaluateEmotionalContribution).
+
+id: look_for_loan
+version: "1.0"
+display_name: "Buscar préstamo bancario"
+description: |
+  Cuando el dinero disponible cae por debajo del umbral mínimo de operación
+  y el agente no tiene una deuda activa, busca financiación en el BankOffice.
+  La contribución de esta meta se modula emocionalmente: un agente más esperanzado
+  la persigue con mayor energía; uno muy incierto puede postergarlo.
+  El agente también valida que tenga tiempo disponible en el día.
+
+pyramid_level: DUTY
+sub_level: L2_OBLIGATION
+
+# Conditions from LookForLoanGoal.detectGoal() + evaluatePlausibility():
+# - money <= config("pfagent.lookforloan") threshold (default 500000 COP)
+# - loanAmountToPay == 0 (no existing debt)
+# - haveLoan == false
+# - enough time left in the day (haveTimeAvailable)
+# Note: isAlreadyExecutedToday check is handled by GoalEngine's task log mechanism.
+activation_when: "state.hasMoneyBelow(500000) && state.peasantProfile.loanAmountToPay == 0 && !state.hasLoan() && state.timeLeftOnDay >= 120"
+
+contribution_rules:
+  fuzzy_inputs:
+    - name: hopeful
+      source: "emotional.hopeful"
+      range: [-1, 1]
+    - name: security
+      source: "emotional.security"
+      range: [-1, 1]
+  rules:
+    - if: "hopeful IS Hopeful and security IS Secure"
+      then: "contribution IS HIGH"
+    - if: "hopeful IS Uncertainty"
+      then: "contribution IS LOW"
+    - if: "security IS Insecure"
+      then: "contribution IS LOW"
+    - default: true
+      then: "contribution IS MEDIUM"
+
+requires:
+  resources:
+    time_left_on_day: 120
+
+plan_ref: look_for_loan_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: have_loan
+        op: set
+        value: true
+      - key: loan_denied
+        op: set
+        value: false
+    emotional:
+      - hopeful: 0.1
+      - security: 0.15
+    episodes:
+      - text: "Solicité un préstamo en el banco y fue aprobado. Dinero actual: {belief.get('money')} COP."
+        tags: [loan, bank, approved, financial]
+  on_failure:
+    beliefs:
+      - key: loan_denied
+        op: set
+        value: true
+    emotional:
+      - hopeful: -0.15
+      - security: -0.2
+    episodes:
+      - text: "El banco negó mi solicitud de préstamo. Dinero actual: {belief.get('money')} COP."
+        tags: [loan, bank, denied, financial]
+
+normative_tags: [law_1_family]

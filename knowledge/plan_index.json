@@ -1,0 +1,544 @@
+[
+  {
+    "id": "attend_religious_events_plan_v1",
+    "display_name": "Attend Religious Events Plan V1",
+    "description": "Attend religious services: consume time and emit spiritual emotional events.",
+    "goal_id": "",
+    "num_steps": 4,
+    "actions": [
+      "consume_resource",
+      "emit_emotion",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/attend_religious_events.yaml",
+    "search_blob": "attend_religious_events_plan_v1 attend religious events plan v1 attend religious services consume time and emit spiritual emotional events agro consume_resource emit_emotion emit_emotion emit_episode"
+  },
+  {
+    "id": "check_crops_plan_v1",
+    "display_name": "Check Crops Plan V1",
+    "description": "Send CROP_INFORMATION to growing crops.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/check_crops.yaml",
+    "search_blob": "check_crops_plan_v1 check crops plan v1 send crop_information to growing crops agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "deforest_land_plan_v1",
+    "display_name": "Deforest Land Plan V1",
+    "description": "Perform deforestation work on forest land.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/deforest_land.yaml",
+    "search_blob": "deforest_land_plan_v1 deforest land plan v1 perform deforestation work on forest land agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "harvest_crops_plan_v1",
+    "display_name": "Harvest Crops Plan V1",
+    "description": "Execute crop harvesting steps.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/harvest_crops.yaml",
+    "search_blob": "harvest_crops_plan_v1 harvest crops plan v1 execute crop harvesting steps agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "irrigate_crops_plan_v1",
+    "display_name": "Irrigate Crops Plan V1",
+    "description": "Send CROP_IRRIGATION to crops.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/irrigate_crops.yaml",
+    "search_blob": "irrigate_crops_plan_v1 irrigate crops plan v1 send crop_irrigation to crops agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "manage_pests_plan_v1",
+    "display_name": "Manage Pests Plan V1",
+    "description": "Send CROP_PESTICIDE to growing crops.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/manage_pests.yaml",
+    "search_blob": "manage_pests_plan_v1 manage pests plan v1 send crop_pesticide to growing crops agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "plant_crop_plan_v1",
+    "display_name": "Plant Crop Plan V1",
+    "description": "Execute crop planting steps.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/plant_crop.yaml",
+    "search_blob": "plant_crop_plan_v1 plant crop plan v1 execute crop planting steps agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "prepare_land_plan_v1",
+    "display_name": "Prepare Land Plan V1",
+    "description": "Execute land preparation steps.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "set_land_crop_type",
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/prepare_land.yaml",
+    "search_blob": "prepare_land_plan_v1 prepare land plan v1 execute land preparation steps agro set_land_crop_type agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "sell_crop_plan_v1",
+    "display_name": "Sell Crop Plan V1",
+    "description": "Execute crop selling steps.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "agro_ecosystem_operation",
+      "emit_episode"
+    ],
+    "category": "agro",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/agro/sell_crop.yaml",
+    "search_blob": "sell_crop_plan_v1 sell crop plan v1 execute crop selling steps agro agro_ecosystem_operation emit_episode"
+  },
+  {
+    "id": "leisure_activities_plan_v1",
+    "display_name": "Leisure Activities Plan V1",
+    "description": "Engage in leisure activities.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "leisure",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/leisure/leisure_activities.yaml",
+    "search_blob": "leisure_activities_plan_v1 leisure activities plan v1 engage in leisure activities leisure consume_resource emit_emotion emit_episode"
+  },
+  {
+    "id": "spend_family_time_plan_v1",
+    "display_name": "Spend Family Time Plan V1",
+    "description": "Spend all remaining time with family.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "leisure",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/leisure/spend_family_time.yaml",
+    "search_blob": "spend_family_time_plan_v1 spend family time plan v1 spend all remaining time with family leisure consume_resource emit_emotion emit_episode"
+  },
+  {
+    "id": "spend_friends_time_plan_v1",
+    "display_name": "Spend Friends Time Plan V1",
+    "description": "Spend time with friends/neighbors.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "spend_friends_time",
+      "emit_episode"
+    ],
+    "category": "leisure",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/leisure/spend_friends_time.yaml",
+    "search_blob": "spend_friends_time_plan_v1 spend friends time plan v1 spend time with friends neighbors leisure spend_friends_time emit_episode"
+  },
+  {
+    "id": "waste_time_and_resources_plan_v1",
+    "display_name": "Waste Time And Resources Plan V1",
+    "description": "Waste time and money in social activities.",
+    "goal_id": "",
+    "num_steps": 4,
+    "actions": [
+      "consume_resource",
+      "increment_belief",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "leisure",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/leisure/waste_time_and_resources.yaml",
+    "search_blob": "waste_time_and_resources_plan_v1 waste time and resources plan v1 waste time and money in social activities leisure consume_resource increment_belief emit_emotion emit_episode"
+  },
+  {
+    "id": "look_for_loan_plan_v1",
+    "display_name": "Look For Loan Plan V1",
+    "description": "Request a loan from BankOffice. Waits for approval or denial. Updates financial beliefs accordingly.",
+    "goal_id": "",
+    "num_steps": 5,
+    "actions": [
+      "consume_resource",
+      "send_event",
+      "wait_for_event",
+      "conditional",
+      "log_audit"
+    ],
+    "category": "obligation",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/obligation/look_for_loan.yaml",
+    "search_blob": "look_for_loan_plan_v1 look for loan plan v1 request a loan from bankoffice waits for approval or denial updates financial beliefs accordingly obligation consume_resource send_event wait_for_event conditional log_audit"
+  },
+  {
+    "id": "pay_debts_plan_v1",
+    "display_name": "Pay Debts Plan V1",
+    "description": "Process loan payment at the bank.",
+    "goal_id": "",
+    "num_steps": 6,
+    "actions": [
+      "consume_resource",
+      "send_event",
+      "consume_resource",
+      "update_belief",
+      "emit_episode",
+      "update_belief"
+    ],
+    "category": "obligation",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/obligation/pay_debts.yaml",
+    "search_blob": "pay_debts_plan_v1 pay debts plan v1 process loan payment at the bank obligation consume_resource send_event consume_resource update_belief emit_episode update_belief"
+  },
+  {
+    "id": "search_for_help_plan_v1",
+    "display_name": "Search For Help Plan V1",
+    "description": "Seek emergency financial help from social programs or through other means.",
+    "goal_id": "",
+    "num_steps": 4,
+    "actions": [
+      "consume_resource",
+      "increment_belief",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "obligation",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/obligation/search_for_help.yaml",
+    "search_blob": "search_for_help_plan_v1 search for help plan v1 seek emergency financial help from social programs or through other means obligation consume_resource increment_belief emit_emotion emit_episode"
+  },
+  {
+    "id": "alternative_work_plan_v1",
+    "display_name": "Alternative Work Plan V1",
+    "description": "Perform an alternative work activity (e.g. mototaxi) to earn extra income.",
+    "goal_id": "",
+    "num_steps": 4,
+    "actions": [
+      "consume_resource",
+      "emit_emotion",
+      "increment_belief",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/alternative_work.yaml",
+    "search_blob": "alternative_work_plan_v1 alternative work plan v1 perform an alternative work activity e g mototaxi to earn extra income skills consume_resource emit_emotion increment_belief emit_episode"
+  },
+  {
+    "id": "get_price_list_plan_v1",
+    "display_name": "Get Price List Plan V1",
+    "description": "Request the current market price list from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 5,
+    "actions": [
+      "consume_resource",
+      "update_belief",
+      "send_marketplace_event",
+      "update_belief",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/get_price_list.yaml",
+    "search_blob": "get_price_list_plan_v1 get price list plan v1 request the current market price list from the marketplace agent skills consume_resource update_belief send_marketplace_event update_belief emit_episode"
+  },
+  {
+    "id": "get_training_plan_v1",
+    "display_name": "Get Training Plan V1",
+    "description": "Attend a training session and increase the agent's training level.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "increment_belief",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/get_training.yaml",
+    "search_blob": "get_training_plan_v1 get training plan v1 attend a training session and increase the agent s training level skills consume_resource increment_belief emit_episode"
+  },
+  {
+    "id": "obtain_a_land_plan_v1",
+    "display_name": "Obtain A Land Plan V1",
+    "description": "Request a land parcel from the Civic Authority and set provisional settlement attributes.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_civic_land_request",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_a_land.yaml",
+    "search_blob": "obtain_a_land_plan_v1 obtain a land plan v1 request a land parcel from the civic authority and set provisional settlement attributes skills consume_resource send_civic_land_request emit_episode"
+  },
+  {
+    "id": "obtain_livestock_plan_v1",
+    "display_name": "Obtain Livestock Plan V1",
+    "description": "Purchase livestock from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_livestock.yaml",
+    "search_blob": "obtain_livestock_plan_v1 obtain livestock plan v1 purchase livestock from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "obtain_pesticides_plan_v1",
+    "display_name": "Obtain Pesticides Plan V1",
+    "description": "Purchase pesticides from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_pesticides.yaml",
+    "search_blob": "obtain_pesticides_plan_v1 obtain pesticides plan v1 purchase pesticides from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "obtain_seeds_plan_v1",
+    "display_name": "Obtain Seeds Plan V1",
+    "description": "Purchase seeds from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_seeds.yaml",
+    "search_blob": "obtain_seeds_plan_v1 obtain seeds plan v1 purchase seeds from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "obtain_supplies_plan_v1",
+    "display_name": "Obtain Supplies Plan V1",
+    "description": "Purchase general supplies from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_supplies.yaml",
+    "search_blob": "obtain_supplies_plan_v1 obtain supplies plan v1 purchase general supplies from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "obtain_tools_plan_v1",
+    "display_name": "Obtain Tools Plan V1",
+    "description": "Purchase tools from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_tools.yaml",
+    "search_blob": "obtain_tools_plan_v1 obtain tools plan v1 purchase tools from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "obtain_water_plan_v1",
+    "display_name": "Obtain Water Plan V1",
+    "description": "Purchase irrigation water from the MarketPlace agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_marketplace_event",
+      "emit_episode"
+    ],
+    "category": "skills",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/skills/obtain_water.yaml",
+    "search_blob": "obtain_water_plan_v1 obtain water plan v1 purchase irrigation water from the marketplace agent skills consume_resource send_marketplace_event emit_episode"
+  },
+  {
+    "id": "communicate_plan_v1",
+    "display_name": "Communicate Plan V1",
+    "description": "Communicate with neighbors.",
+    "goal_id": "",
+    "num_steps": 1,
+    "actions": [
+      "log_audit"
+    ],
+    "category": "social",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/social/communicate.yaml",
+    "search_blob": "communicate_plan_v1 communicate plan v1 communicate with neighbors social log_audit"
+  },
+  {
+    "id": "community_meeting_plan_v1",
+    "display_name": "Community Meeting Plan V1",
+    "description": "Participate in a community gathering.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "increment_belief",
+      "emit_episode"
+    ],
+    "category": "social",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/social/community_meeting_plan.yaml",
+    "search_blob": "community_meeting_plan_v1 community meeting plan v1 participate in a community gathering social consume_resource increment_belief emit_episode"
+  },
+  {
+    "id": "look_for_collaboration_plan_v1",
+    "display_name": "Look For Collaboration Plan V1",
+    "description": "Request workforce help from the community dynamics agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "send_society_collaboration",
+      "emit_episode"
+    ],
+    "category": "social",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/social/look_for_collaboration.yaml",
+    "search_blob": "look_for_collaboration_plan_v1 look for collaboration plan v1 request workforce help from the community dynamics agent social consume_resource send_society_collaboration emit_episode"
+  },
+  {
+    "id": "provide_collaboration_plan_v1",
+    "display_name": "Provide Collaboration Plan V1",
+    "description": "Offer availability to help other peasants via the community dynamics agent.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "send_society_collaboration",
+      "update_belief",
+      "emit_episode"
+    ],
+    "category": "social",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/social/provide_collaboration.yaml",
+    "search_blob": "provide_collaboration_plan_v1 provide collaboration plan v1 offer availability to help other peasants via the community dynamics agent social send_society_collaboration update_belief emit_episode"
+  },
+  {
+    "id": "work_for_other_plan_v1",
+    "display_name": "Work For Other Plan V1",
+    "description": "Work for another peasant family under a labor contract.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "emit_emotion",
+      "emit_episode"
+    ],
+    "category": "social",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/social/work_for_other.yaml",
+    "search_blob": "work_for_other_plan_v1 work for other plan v1 work for another peasant family under a labor contract social consume_resource emit_emotion emit_episode"
+  },
+  {
+    "id": "do_healthcare_plan_v1",
+    "display_name": "Do Healthcare Plan V1",
+    "description": "Execute health care activities: consume time and improve health.",
+    "goal_id": "",
+    "num_steps": 5,
+    "actions": [
+      "consume_resource",
+      "increase_health",
+      "emit_episode",
+      "emit_emotion",
+      "update_belief"
+    ],
+    "category": "survival",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/survival/do_healthcare.yaml",
+    "search_blob": "do_healthcare_plan_v1 do healthcare plan v1 execute health care activities consume time and improve health survival consume_resource increase_health emit_episode emit_emotion update_belief"
+  },
+  {
+    "id": "do_vitals_plan_v1",
+    "display_name": "Do Vitals Plan V1",
+    "description": "Execute daily vital activities: food, water, rest. Resets new_day flag.",
+    "goal_id": "",
+    "num_steps": 5,
+    "actions": [
+      "consume_resource",
+      "send_event",
+      "update_belief",
+      "emit_episode",
+      "emit_emotion"
+    ],
+    "category": "survival",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/survival/do_vitals.yaml",
+    "search_blob": "do_vitals_plan_v1 do vitals plan v1 execute daily vital activities food water rest resets new_day flag survival consume_resource send_event update_belief emit_episode emit_emotion"
+  },
+  {
+    "id": "do_void_plan_v1",
+    "display_name": "Do Void Plan V1",
+    "description": "Resolve the waiting state by resetting the flag.",
+    "goal_id": "",
+    "num_steps": 1,
+    "actions": [
+      "update_belief"
+    ],
+    "category": "survival",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/survival/do_void.yaml",
+    "search_blob": "do_void_plan_v1 do void plan v1 resolve the waiting state by resetting the flag survival update_belief"
+  },
+  {
+    "id": "seek_purpose_plan_v1",
+    "display_name": "Seek Purpose Plan V1",
+    "description": "Establish the agent's purpose as a farmer.",
+    "goal_id": "",
+    "num_steps": 3,
+    "actions": [
+      "consume_resource",
+      "update_belief",
+      "emit_episode"
+    ],
+    "category": "survival",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/survival/seek_purpose.yaml",
+    "search_blob": "seek_purpose_plan_v1 seek purpose plan v1 establish the agent s purpose as a farmer survival consume_resource update_belief emit_episode"
+  },
+  {
+    "id": "self_evaluation_plan_v1",
+    "display_name": "Self Evaluation Plan V1",
+    "description": "Synchronize agent's internal clock.",
+    "goal_id": "",
+    "num_steps": 2,
+    "actions": [
+      "sync_clock",
+      "update_belief"
+    ],
+    "category": "survival",
+    "source_path": "C:/Users/Luck.D/Documents/GitHub/agrointent-mvp/files/plans/survival/self_evaluation.yaml",
+    "search_blob": "self_evaluation_plan_v1 self evaluation plan v1 synchronize agent s internal clock survival sync_clock update_belief"
+  }
+]

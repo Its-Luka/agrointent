@@ -1,0 +1,406 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wellprodsim.wps/specs/BeliefSchema.json",
+  "title": "BeliefSchema",
+  "description": "Catalog of all beliefs available in PeasantFamilyBelieves. Each entry defines the Redis key, Java field source, type, valid range, and description. Used by BeliefSchemaValidator and GoalRegistry for activation_when key validation.",
+  "type": "object",
+  "required": ["version", "beliefs"],
+  "properties": {
+    "version": { "type": "string" },
+    "beliefs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/BeliefEntry" }
+    }
+  },
+  "definitions": {
+    "BeliefEntry": {
+      "type": "object",
+      "required": ["key", "type", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Redis Hash field name and MVEL access path in activation_when expressions."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Double", "Integer", "Boolean", "String"],
+          "description": "Java type for deserialization."
+        },
+        "source": {
+          "type": "string",
+          "description": "Original Java field path (e.g. 'peasantProfile.money', 'haveEmotions')."
+        },
+        "description": { "type": "string" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "default_value": {},
+        "redis_hash": {
+          "type": "string",
+          "description": "Redis Hash key pattern: agent:{id}:state or agent:{id}:personality."
+        }
+      }
+    }
+  },
+  "version": "1.0",
+  "beliefs": [
+    {
+      "key": "money",
+      "type": "Double",
+      "source": "peasantProfile.money",
+      "description": "Current money available in Colombian pesos (COP).",
+      "min": 0,
+      "default_value": 1500000,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "initial_money",
+      "type": "Double",
+      "source": "peasantProfile.initialMoney",
+      "description": "Starting money used as baseline reference.",
+      "min": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "health",
+      "type": "Integer",
+      "source": "peasantProfile.health",
+      "description": "Agent health level. Decreases daily without food/rest. Death when reaches 0.",
+      "min": 0,
+      "max": 100,
+      "default_value": 100,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "total_income",
+      "type": "Double",
+      "source": "peasantProfile.totalIncome",
+      "description": "Accumulated total income over the simulation.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "loan_amount_to_pay",
+      "type": "Double",
+      "source": "peasantProfile.loanAmountToPay",
+      "description": "Remaining debt to pay to BankOffice.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "have_loan",
+      "type": "Boolean",
+      "source": "haveLoan",
+      "description": "Whether the agent currently has an active loan.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "loan_denied",
+      "type": "Boolean",
+      "source": "loanDenied",
+      "description": "Whether the last loan request was denied.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "seeds",
+      "type": "Integer",
+      "source": "peasantProfile.seeds",
+      "description": "Available seed units.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "tools",
+      "type": "Integer",
+      "source": "peasantProfile.tools",
+      "description": "Available farming tool units.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "water_available",
+      "type": "Integer",
+      "source": "peasantProfile.waterAvailable",
+      "description": "Available water units for irrigation.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "pesticides_available",
+      "type": "Integer",
+      "source": "peasantProfile.pesticidesAvailable",
+      "description": "Available pesticide units.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "supplies",
+      "type": "Integer",
+      "source": "peasantProfile.supplies",
+      "description": "Available general supply units.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "harvested_weight",
+      "type": "Integer",
+      "source": "peasantProfile.harvestedWeight",
+      "description": "Weight in kg of the most recent harvest.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "total_harvested_weight",
+      "type": "Double",
+      "source": "peasantProfile.totalHarvestedWeight",
+      "description": "Cumulative harvest weight across all crops and years.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "crop_size",
+      "type": "Integer",
+      "source": "peasantProfile.cropSize",
+      "description": "Size of the current crop plot in standard units.",
+      "min": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "crop_health",
+      "type": "Double",
+      "source": "peasantProfile.cropHealth",
+      "description": "Current crop health [0,1]. Affected by pests, disease, drought.",
+      "min": 0,
+      "max": 1,
+      "default_value": 1.0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "farm_ready",
+      "type": "Double",
+      "source": "peasantProfile.farmReady",
+      "description": "Farm preparation level [0,1]. Must be 1.0 before planting.",
+      "min": 0,
+      "max": 1,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "livestock_number",
+      "type": "Integer",
+      "source": "peasantProfile.livestockNumber",
+      "description": "Number of livestock animals.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "livestock_health",
+      "type": "Double",
+      "source": "peasantProfile.livestockHealth",
+      "description": "Livestock health [0,1].",
+      "min": 0,
+      "max": 1,
+      "default_value": 1.0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "new_day",
+      "type": "Boolean",
+      "source": "newDay",
+      "description": "True at the start of each simulation day. Reset after DoVitals executes.",
+      "default_value": true,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "current_day",
+      "type": "Integer",
+      "source": "currentDay",
+      "description": "Current simulation day number (1-based).",
+      "min": 1,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "time_left_on_day",
+      "type": "Double",
+      "source": "timeLeftOnDay",
+      "description": "Remaining time budget for the current day in minutes (starts at 1440 = 24h).",
+      "min": 0,
+      "max": 1440,
+      "default_value": 1440,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "worker_without_land",
+      "type": "Boolean",
+      "source": "workerWithoutLand",
+      "description": "True when the agent has no assigned land parcels and works for others.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "asked_for_contractor",
+      "type": "Boolean",
+      "source": "askedForContractor",
+      "description": "Whether the agent has already requested contract work today.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "asked_for_collaboration",
+      "type": "Boolean",
+      "source": "askedForCollaboration",
+      "description": "Whether the agent has already requested collaboration today.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "days_to_work_for_other",
+      "type": "Integer",
+      "source": "daysToWorkForOther",
+      "description": "Remaining days committed to working for another agent.",
+      "min": 0,
+      "default_value": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "training_level",
+      "type": "Double",
+      "source": "trainingLevel",
+      "description": "Agent's agricultural training level [0,1]. Increases via GetTrainingGoal.",
+      "min": 0,
+      "max": 1,
+      "default_value": 0.4,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "training_available",
+      "type": "Boolean",
+      "source": "trainingAvailable",
+      "description": "Whether a training slot is currently available from CivicAuthority.",
+      "default_value": false,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "have_emotions",
+      "type": "Boolean",
+      "source": "haveEmotions",
+      "description": "Whether emotional BDI evaluation is enabled for this agent.",
+      "default_value": true,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "minimum_vital",
+      "type": "Double",
+      "source": "peasantProfile.minimumVital",
+      "description": "Minimum money threshold needed for basic survival costs per day.",
+      "min": 0,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "housing",
+      "type": "Double",
+      "source": "peasantProfile.housing",
+      "description": "Housing quality index [0,1].",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:state"
+    },
+    {
+      "key": "personality",
+      "type": "Double",
+      "source": "personality",
+      "description": "Agent's personality factor [0,1]. Influences emotional baseline and decision weights.",
+      "min": 0,
+      "max": 1,
+      "default_value": 0.5,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "peasant_family_affinity",
+      "type": "Double",
+      "source": "peasantProfile.peasantFamilyAffinity",
+      "description": "Family cohesion factor [0,1]. Modulates SpendFamilyTime goal weight.",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "peasant_friends_affinity",
+      "type": "Double",
+      "source": "peasantProfile.peasantFriendsAffinity",
+      "description": "Social engagement affinity [0,1].",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "peasant_leisure_affinity",
+      "type": "Double",
+      "source": "peasantProfile.peasantLeisureAffinity",
+      "description": "Leisure preference factor [0,1].",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "social_affinity",
+      "type": "Double",
+      "source": "peasantProfile.socialAffinity",
+      "description": "Degree of acceptance of collaboration with other agents [0,1].",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "live_stock_affinity",
+      "type": "Double",
+      "source": "peasantProfile.liveStockAffinity",
+      "description": "Affinity for livestock farming [0,1].",
+      "min": 0,
+      "max": 1,
+      "redis_hash": "agent:{id}:personality"
+    },
+    {
+      "key": "emotional.happiness",
+      "type": "Double",
+      "source": "emotionalState.HappinessSadness.currentValue",
+      "description": "Happiness-Sadness emotional axis current value. Positive = happy, negative = sad.",
+      "min": -1,
+      "max": 1,
+      "default_value": 0.0,
+      "redis_hash": "agent:{id}:emotional"
+    },
+    {
+      "key": "emotional.hopeful",
+      "type": "Double",
+      "source": "emotionalState.HopefulUncertainty.currentValue",
+      "description": "Hope-Uncertainty emotional axis current value. Positive = hopeful, negative = uncertain.",
+      "min": -1,
+      "max": 1,
+      "default_value": 0.0,
+      "redis_hash": "agent:{id}:emotional"
+    },
+    {
+      "key": "emotional.security",
+      "type": "Double",
+      "source": "emotionalState.SecureInsecure.currentValue",
+      "description": "Security-Insecurity emotional axis current value. Positive = secure, negative = insecure.",
+      "min": -1,
+      "max": 1,
+      "default_value": 0.0,
+      "redis_hash": "agent:{id}:emotional"
+    },
+  ]
+}

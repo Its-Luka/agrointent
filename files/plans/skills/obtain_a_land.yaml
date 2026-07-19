@@ -1,0 +1,31 @@
+# PlanSpec: obtain_a_land_plan_v1
+# Equivalent to ObtainALandTask.java execution
+# Sends land request to CivicAuthority and sets provisional settlement attributes.
+
+id: obtain_a_land_plan_v1
+version: "1.0"
+description: "Request a land parcel from the Civic Authority and set provisional settlement attributes."
+
+steps:
+  - id: consume_land_request_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: ObtainALandTask
+
+  - id: send_land_request
+    action: send_civic_land_request
+
+  - id: record_land_episode
+    action: emit_episode
+    args:
+      text: "Solicité formalmente una parcela de tierra a la Autoridad Cívica para iniciar mi actividad agrícola."
+      tags: [land, civic_authority, resources, development]
+
+on_timeout: []
+on_failure:
+  - id: log_land_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_a_land_plan failed for agent {agent_id}"

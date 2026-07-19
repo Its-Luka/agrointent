@@ -1,0 +1,111 @@
+# PlanSpec: look_for_loan_plan_v1
+# Equivalent to LookForLoanTask.java execution
+# Sends a loan request to BankOffice and waits for approval/denial response.
+# The outcome updates beliefs and records an episode.
+
+id: look_for_loan_plan_v1
+version: "1.0"
+description: "Request a loan from BankOffice. Waits for approval or denial. Updates financial beliefs accordingly."
+
+preconditions:
+  - "belief.get('money') <= 500000"
+  - "belief.get('loan_amount_to_pay') == 0"
+  - "belief.get('have_loan') == false"
+
+steps:
+  - id: consume_travel_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 240
+      description: "Travel time to BankOffice and waiting"
+
+  - id: request_loan
+    action: send_event
+    args:
+      to: BankOffice
+      type: LOAN_REQUEST
+      payload:
+        requesting_agent: "{agent_id}"
+        current_money: "{belief.get('money')}"
+        requested_amount: 1500000
+
+  - id: await_loan_response
+    action: wait_for_event
+    args:
+      type: LOAN_RESPONSE
+      sender: BankOffice
+      timeout_ticks: 1
+    binds: loan_response
+
+  - id: process_approval
+    action: conditional
+    args:
+      condition: "bindings.loan_response.approved == true"
+      if_true:
+        - id: set_have_loan
+          action: update_belief
+          args:
+            key: have_loan
+            value: true
+        - id: add_loan_money
+          action: increment_belief
+          args:
+            key: money
+            delta: "{bindings.loan_response.amount}"
+        - id: set_loan_to_pay
+          action: update_belief
+          args:
+            key: loan_amount_to_pay
+            value: "{bindings.loan_response.amount_to_pay}"
+        - id: record_approval_episode
+          action: emit_episode
+          args:
+            text: "El banco aprobó mi préstamo. Recibiré {bindings.loan_response.amount} COP."
+            tags: [loan, bank, approved, financial]
+        - id: emotion_approved
+          action: emit_emotion
+          args:
+            axis: hopeful
+            delta: 0.1
+      if_false:
+        - id: set_loan_denied
+          action: update_belief
+          args:
+            key: loan_denied
+            value: true
+        - id: record_denial_episode
+          action: emit_episode
+          args:
+            text: "El banco negó mi solicitud de préstamo. No cumplí con los requisitos."
+            tags: [loan, bank, denied, financial]
+        - id: emotion_denied
+          action: emit_emotion
+          args:
+            axis: hopeful
+            delta: -0.15
+
+  - id: log_loan_attempt
+    action: log_audit
+    args:
+      level: INFO
+      message: "Loan attempt by {agent_id} at sim_time {sim_time}: approved={bindings.loan_response.approved}"
+
+on_timeout:
+  - id: timeout_episode
+    action: emit_episode
+    args:
+      text: "No recibí respuesta del banco. El trámite quedó pendiente."
+      tags: [loan, bank, timeout]
+  - id: timeout_emotion
+    action: emit_emotion
+    args:
+      axis: security
+      delta: -0.1
+
+on_failure:
+  - id: failure_log
+    action: log_audit
+    args:
+      level: ERROR
+      message: "look_for_loan_plan failed unexpectedly for {agent_id}"

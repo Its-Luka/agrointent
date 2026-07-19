@@ -1,0 +1,54 @@
+regions:
+  - name: Aculco
+    aliases: [aculco]
+    crops: [maiz, ganado]
+    problems: [sequía, falta_de_forraje, falta_de_agua]
+    notes: "Zona norte del EdoMéx; frecuente narrativa de ganado y leche/queso."
+
+  - name: Atlacomulco
+    aliases: [atlacomulco]
+    crops: [maiz]
+    problems: [siniestros_agroclimaticos, sequía, granizada]
+    notes: "Norte del EdoMéx; útil para casos de apoyo por pérdidas."
+
+  - name: Toluca
+    aliases: [toluca]
+    crops: [ganado, flores, maiz]
+    problems: [sequía, costos_altos]
+    notes: "Centro del estado; útil para narrativas urbanas-rurales y de logística."
+
+  - name: Acambay
+    aliases: [acambay]
+    crops: [ganado, maiz]
+    problems: [sequía, falta_de_pasto, falta_de_agua]
+    notes: "Muy útil para narrativas de ganado y agua."
+
+  - name: Luvianos
+    aliases: [luvianos]
+    crops: [maiz, ganado]
+    problems: [sequía, extorsión, inseguridad]
+    notes: "Sur del EdoMéx; frecuente problema de extorsión y doble presión."
+
+  - name: Amatepec
+    aliases: [amatepec]
+    crops: [maiz, ganado]
+    problems: [sequía, extorsión, plagas]
+    notes: "Sur del EdoMéx; zona de presión climática y social."
+
+  - name: Tejupilco
+    aliases: [tejupilco]
+    crops: [maiz, ganado]
+    problems: [sequía, extorsión, plagas]
+    notes: "Sur del EdoMéx; útil para crisis múltiples."
+
+  - name: Tlatlaya
+    aliases: [tlatlaya]
+    crops: [ganado, maiz]
+    problems: [sequía, plaga_ganado, inseguridad]
+    notes: "Zona sur; narrativa de plagas zoosanitarias y agua."
+
+  - name: Ixtlahuaca
+    aliases: [ixtlahuaca]
+    crops: [maiz, frijol]
+    problems: [sequía, costos_altos]
+    notes: "Zona norte/centro; útil para maíz y frijol."

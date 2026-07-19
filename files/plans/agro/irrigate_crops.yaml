@@ -1,0 +1,21 @@
+# PlanSpec: irrigate_crops_plan_v1
+# Equivalent to IrrigateCropsTask.java
+
+id: irrigate_crops_plan_v1
+version: "1.0"
+description: "Send CROP_IRRIGATION to crops."
+
+steps:
+  - id: irrigate_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "IRRIGATE"
+
+  - id: record_irrigate_episode
+    action: emit_episode
+    args:
+      text: "He regado los cultivos hoy. El agua es vida, especialmente en estas tierras."
+      tags: [agro, irrigate, care]
+
+on_timeout: []
+on_failure: []

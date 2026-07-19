@@ -1,0 +1,65 @@
+# resources/pyramid_levels.yaml
+#
+# Fuente de verdad para los valores VÁLIDOS: config/goal_pyramid.yaml +
+# data/ebdi/schemas/GoalSpec.schema.json (EthosTerra.zip), y coincide
+# exactamente con el Literal PyramidLevel de tu fie_beta/schemas.py:
+#   SURVIVAL, DUTY, OPPORTUNITY, NEED, ATTENTION_CYCLE  (5 valores, ese orden de prioridad)
+#
+# El Resumen Ejecutivo original tenía 6 valores incorrectos
+# (SURVIVAL, NEEDS, DUTY, GROWTH, DEVOTION, ATTENTION_CYCLE) que NO
+# existen en ningún archivo real. Esta versión es la corregida.
+
+valid_levels:
+  - name: SURVIVAL
+    priority_weight: 110
+    description: "Necesidades vitales — comida, salud, mantenimiento básico. Prioridad máxima."
+    example_goals: [do_vitals, do_healthcare, seek_purpose, do_void, self_evaluation]
+
+  - name: DUTY
+    priority_weight: 100
+    description: "Obligaciones financieras y sociales impostergables."
+    example_goals: [look_for_loan, pay_debts]
+
+  - name: OPPORTUNITY
+    priority_weight: 65
+    description: "Actividades productivas, agrícolas y de desarrollo/recursos/habilidades."
+    example_goals: [plant_crop, harvest_crops, sell_crop, obtain_seeds, obtain_tools, get_training]
+
+  - name: NEED
+    priority_weight: 30
+    description: "Necesidades sociales — colaboración, comunicación, comunidad."
+    example_goals: [communicate, look_for_collaboration, provide_collaboration, community_meeting]
+
+  - name: ATTENTION_CYCLE
+    priority_weight: 10
+    description: "Ocio y descanso. Prioridad mínima."
+    example_goals: [spend_family_time, leisure_activities, find_news]
+
+# --------------------------------------------------------------------------
+# ADVERTENCIA IMPORTANTE (verificado con grep sobre los 37 goals reales):
+#
+# Los archivos YAML de EthosTerra en realidad usan 7 valores distintos en
+# el campo pyramid_level, no 5. Los 2 valores extra NO están documentados
+# en config/goal_pyramid.yaml y romperían la validación estricta de
+# fie_beta/schemas.py si se copian tal cual. build_examples.py aplica el
+# siguiente mapa de normalización automáticamente:
+# --------------------------------------------------------------------------
+raw_value_normalization:
+  ATTENTION_CYCLE: ATTENTION_CYCLE      # (12 goals) -- ya válido, sin cambio
+  SURVIVAL: SURVIVAL                    # (5 goals)  -- ya válido, sin cambio
+  DUTY: DUTY                            # (2 goals)  -- ya válido, sin cambio
+  NEED: NEED                            # (3 goals)  -- ya válido, sin cambio
+  OPORTUNITY: OPPORTUNITY               # (4 goals)  -- TYPO en el dato fuente (falta la "P");
+                                         #              attend_religious_events, sell_crop,
+                                         #              search_for_help, work_for_other
+  REQUIREMENT: OPPORTUNITY               # (10 goals) -- no existe en el enum de 5 valores;
+                                         #              son los 10 goals de skills/ (obtain_*,
+                                         #              get_*, alternative_work), que en
+                                         #              config/goal_pyramid.yaml viven bajo el
+                                         #              sub_level L4_SKILLS_AND_RESOURCES,
+                                         #              anidado dentro de OPPORTUNITY.
+  SOCIAL: NEED                          # (1 goal)   -- solo community_meeting.yaml; sus 4
+                                         #              hermanos en goals/social/ ya usan NEED,
+                                         #              así que se normaliza igual por consistencia.
+
+# Total verificado: 12+5+2+3+4+10+1 = 37 goals.

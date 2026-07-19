@@ -1,0 +1,34 @@
+# GoalSpec: obtain_tools
+# Equivalent to ObtainToolsGoal.java (L4SkillsResources)
+# Agent buys tools from the market when toolsNeeded > 0.
+#
+# Java detectGoal: resourceNeededType == TOOLS → return 1 (simplified)
+
+id: obtain_tools
+version: "1.0"
+display_name: "Obtener herramientas"
+description: |
+  El agente compra las herramientas requeridas al mercado cuando
+  identifica que las necesita para continuar las actividades agrícolas.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "state.needsTools() && state.isPriceListAvailable()"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_tools_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: resource_needed_type
+        op: set
+        value: NONE
+    episodes:
+      - text: "Adquirí herramientas en el mercado el día {belief.get('current_day')}."
+        tags: [tools, market, resources]
+
+normative_tags: []

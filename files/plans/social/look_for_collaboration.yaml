@@ -1,0 +1,30 @@
+# PlanSpec: look_for_collaboration_plan_v1
+# Equivalent to LookForCollaborationTask.java execution
+# Requests help from the society agent.
+
+id: look_for_collaboration_plan_v1
+version: "1.0"
+description: "Request workforce help from the community dynamics agent."
+
+steps:
+  - id: consume_collab_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: LookForCollaborationTask
+
+  - id: request_help
+    action: send_society_collaboration
+    args:
+      guard: org.wpsim.CommunityDynamics.Guards.CommunityDynamicsRequestHelpGuard
+      amount: 5
+      flag: asked_for_collaboration
+
+  - id: record_collab_episode
+    action: emit_episode
+    args:
+      text: "He solicitado ayuda a la comunidad para gestionar mis terrenos, ya que la carga de trabajo es elevada."
+      tags: [social, collaboration, society]
+
+on_timeout: []
+on_failure: []

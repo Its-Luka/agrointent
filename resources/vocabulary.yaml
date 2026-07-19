@@ -1,0 +1,45 @@
+# resources/vocabulary.yaml
+#
+# Vocabulario agrícola/regional del Estado de México (sección 10 del
+# resumen ejecutivo). Puramente narrativo: ninguno de estos términos
+# corresponde a una belief key, action o crop_type del motor -- son para
+# que el LLM entienda una narrativa campesina coloquial y la traduzca
+# correctamente a los campos que sí existen (description, activation_when,
+# emit_episode.text).
+
+terms:
+  - term: milpa
+    meaning: "Parcela tradicional de policultivo, típicamente maíz-frijol-calabaza."
+  - term: ejido
+    meaning: "Régimen de propiedad de tierra comunal/colectiva, muy común en el Edomex rural."
+  - term: temporal
+    meaning: "Agricultura que depende de la lluvia (sin riego artificial)."
+  - term: riego
+    meaning: "Irrigación artificial de la parcela (contrasta con temporal)."
+  - term: barbecho
+    meaning: "Labranza que voltea la tierra antes de sembrar; también periodo de descanso del suelo."
+  - term: surco
+    meaning: "Zanja/hilera donde se coloca la semilla."
+  - term: siembra
+    meaning: "Acto de sembrar; equivalente narrativo de la acción PLANT."
+  - term: cosecha
+    meaning: "Recolección del cultivo maduro; equivalente narrativo de la acción HARVEST."
+  - term: jornalero
+    meaning: "Trabajador agrícola pagado por día, no dueño de la tierra."
+  - term: parcela
+    meaning: "Unidad de tierra cultivada por una familia/agente."
+  - term: agostadero
+    meaning: "Terreno de pastoreo, usado para ganado en época seca."
+  - term: minifundio
+    meaning: "Parcela de tamaño muy reducido, típica de la fragmentación de tierras en el Edomex."
+  - term: coyote
+    meaning: "Intermediario que compra la cosecha a bajo precio para revenderla; relevante para sell_crop / send_marketplace_event."
+  - term: tequio
+    meaning: "Trabajo comunitario no remunerado; relevante para send_society_collaboration."
+  - term: apoyo / programa de apoyo
+    meaning: "Ayuda gubernamental o de ONG (insumos, crédito blando); relevante para look_for_loan / search_for_help."
+
+# Nota de uso: si el LLM ve uno de estos términos en la narrativa, debe
+# usarlo para redactar mejor `description`/`activation_when` en español,
+# pero NUNCA inventarlo como belief key o como argumento de una acción --
+# esas siguen restringidas a lo documentado en prompt.py.

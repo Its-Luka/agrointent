@@ -1,0 +1,36 @@
+# PlanSpec: get_training_plan_v1
+# Equivalent to GetTrainingTask.java execution
+# Consumes time and increases training level.
+
+id: get_training_plan_v1
+version: "1.0"
+description: "Attend a training session and increase the agent's training level."
+
+steps:
+  - id: consume_training_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      description: "Time spent in training session"
+      time_key: GetTrainingTask
+
+  - id: increase_training_level
+    action: increment_belief
+    args:
+      key: training_level
+      amount: 1
+      description: "Increment training level by 1"
+
+  - id: record_training_episode
+    action: emit_episode
+    args:
+      text: "Asistí a una capacitación agrícola y mejoré mis conocimientos técnicos."
+      tags: [training, skills, education]
+
+on_timeout: []
+on_failure:
+  - id: log_training_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "get_training_plan failed for agent {agent_id}"

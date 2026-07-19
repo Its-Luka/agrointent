@@ -1,0 +1,15 @@
+# GoalSpec: look_for_collaboration
+# Equivalent to LookForCollaborationGoal.java
+# Triggered when a farmer has multiple lands and enough money to hire help.
+
+id: look_for_collaboration
+version: "1.0"
+display_name: "Solicitar Colaboración Social"
+description: "Request help from other peasants via Community Dynamics when workload is high."
+pyramid_level: NEED
+plan_ref: look_for_collaboration_plan_v1
+
+activation_when: "state.assignedLands.size() > 1 && !state.hasHelper() && !state.askedForCollaboration && state.hasMoney(1000000)"
+
+contribution_rules:
+  fixed_value: 0.6

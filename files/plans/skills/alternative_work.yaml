@@ -1,0 +1,43 @@
+# PlanSpec: alternative_work_plan_v1
+# Equivalent to AlternativeWorkTask.java execution
+# Consumes time, emits work emotion, adds random income (10000–35000).
+
+id: alternative_work_plan_v1
+version: "1.0"
+description: "Perform an alternative work activity (e.g. mototaxi) to earn extra income."
+
+steps:
+  - id: consume_alternative_work_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      description: "Time for alternative work activity"
+      time_key: AlternativeWorkTask
+
+  - id: emit_work_emotion
+    action: emit_emotion
+    args:
+      axis: work
+      delta: 0.05
+
+  - id: earn_income
+    action: increment_belief
+    args:
+      key: money
+      min: 10000
+      max: 35000
+      description: "Random income from alternative work (10000–35000 COP)"
+
+  - id: record_alternative_work_episode
+    action: emit_episode
+    args:
+      text: "Realicé trabajo alternativo y obtuve ingresos adicionales."
+      tags: [alternative_work, income, skills]
+
+on_timeout: []
+on_failure:
+  - id: log_alternative_work_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "alternative_work_plan failed for agent {agent_id}"

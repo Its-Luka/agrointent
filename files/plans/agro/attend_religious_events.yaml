@@ -1,0 +1,36 @@
+# PlanSpec: attend_religious_events_plan_v1
+# Equivalent to AttendReligiousEventsTask.java execution
+
+id: attend_religious_events_plan_v1
+version: "1.0"
+description: "Attend religious services: consume time and emit spiritual emotional events."
+
+steps:
+  - id: consume_religious_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: AttendReligiousEventsTask
+
+  - id: emit_family_spiritual
+    action: emit_emotion
+    args:
+      subject: FAMILY
+      predicate: SPIRITUALHEALTH
+      object: TIME
+
+  - id: emit_friend_spiritual
+    action: emit_emotion
+    args:
+      subject: FRIEND
+      predicate: SPIRITUALHEALTH
+      object: TIME
+
+  - id: record_episode
+    action: emit_episode
+    args:
+      text: "He asistido a los servicios religiosos del domingo. La fe y la comunidad nos dan fuerzas para seguir adelante."
+      tags: [social, religion, spiritual]
+
+on_timeout: []
+on_failure: []

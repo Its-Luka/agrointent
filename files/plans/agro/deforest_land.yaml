@@ -1,0 +1,21 @@
+# PlanSpec: deforest_land_plan_v1
+# Equivalent to DeforestingLandTask.java
+
+id: deforest_land_plan_v1
+version: "1.0"
+description: "Perform deforestation work on forest land."
+
+steps:
+  - id: deforest_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "DEFOREST"
+
+  - id: record_deforest_episode
+    action: emit_episode
+    args:
+      text: "Hoy he avanzado con la deforestación de una parte del terreno. Es un trabajo duro, pero necesario para ampliar nuestra capacidad de siembra."
+      tags: [agro, deforest, land]
+
+on_timeout: []
+on_failure: []

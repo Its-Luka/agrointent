@@ -1,0 +1,21 @@
+# PlanSpec: plant_crop_plan_v1
+# Equivalent to PlantCropTask.java execution
+
+id: plant_crop_plan_v1
+version: "1.0"
+description: "Execute crop planting steps."
+
+steps:
+  - id: plant_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "PLANT"
+
+  - id: record_plant_episode
+    action: emit_episode
+    args:
+      text: "He sembrado las semillas en el terreno preparado. Ahora comienza el ciclo de crecimiento."
+      tags: [agro, plant, crop]
+
+on_timeout: []
+on_failure: []

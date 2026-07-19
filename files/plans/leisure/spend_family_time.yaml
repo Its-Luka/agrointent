@@ -1,0 +1,29 @@
+# PlanSpec: spend_family_time_plan_v1
+# Equivalent to SpendFamilyTimeTask.java execution
+
+id: spend_family_time_plan_v1
+version: "1.0"
+description: "Spend all remaining time with family."
+
+steps:
+  - id: consume_all_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 1440 # Will be capped at current timeLeftOnDay by implementation
+
+  - id: emit_family_emotion
+    action: emit_emotion
+    args:
+      event: "FAMILY"
+      type: "LEISURE"
+      charac: "TIME"
+
+  - id: record_family_episode
+    action: emit_episode
+    args:
+      text: "He pasado el resto del día compartiendo con mi familia, fortaleciendo nuestros lazos."
+      tags: [leisure, family]
+
+on_timeout: []
+on_failure: []

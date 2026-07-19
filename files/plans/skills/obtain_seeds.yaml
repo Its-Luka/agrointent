@@ -1,0 +1,35 @@
+# PlanSpec: obtain_seeds_plan_v1
+# Equivalent to ObtainSeedsTask.java execution
+# Sends BUY_SEEDS event to MarketPlace using seedsNeeded quantity.
+
+id: obtain_seeds_plan_v1
+version: "1.0"
+description: "Purchase seeds from the MarketPlace agent."
+
+steps:
+  - id: consume_seeds_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      description: "Time spent obtaining seeds"
+      time_key: ObtainSeedsTask
+
+  - id: buy_seeds
+    action: send_marketplace_event
+    args:
+      message_type: BUY_SEEDS
+      reset_resource_needed: true
+
+  - id: record_seeds_episode
+    action: emit_episode
+    args:
+      text: "Adquirí semillas en el mercado para la próxima siembra."
+      tags: [seeds, market, resources]
+
+on_timeout: []
+on_failure:
+  - id: log_seeds_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_seeds_plan failed for agent {agent_id}"

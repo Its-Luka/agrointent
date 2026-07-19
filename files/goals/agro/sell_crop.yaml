@@ -1,0 +1,15 @@
+# GoalSpec: sell_crop
+# Equivalent to SellCropGoal.java
+# Activates when harvested weight is available to sell.
+
+id: sell_crop
+version: "1.0"
+display_name: "Vender Cosecha"
+description: "Sell harvested crops at the marketplace."
+pyramid_level: OPORTUNITY
+plan_ref: sell_crop_plan_v1
+
+activation_when: "state.hasHarvestedWeight()"
+
+contribution_rules:
+  fixed_value: 0.98

@@ -1,0 +1,36 @@
+# PlanSpec: search_for_help_plan_v1
+# Equivalent to SearchForHelpAndNecessityTask.java execution
+# Provides emergency assistance when money is critically low.
+
+id: search_for_help_plan_v1
+version: "1.0"
+description: "Seek emergency financial help from social programs or through other means."
+
+steps:
+  - id: consume_search_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: SearchForHelpAndNecessityTask
+
+  - id: receive_aid
+    action: increment_belief
+    args:
+      key: money
+      amount: 380000
+
+  - id: emit_helped_emotion
+    action: emit_emotion
+    args:
+      subject: FAMILY
+      predicate: HELPED
+      object: MONEY
+
+  - id: record_episode
+    action: emit_episode
+    args:
+      text: "Hemos recibido ayuda de programas sociales para cubrir nuestras necesidades básicas."
+      tags: [obligation, help, money]
+
+on_timeout: []
+on_failure: []

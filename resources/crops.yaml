@@ -1,0 +1,47 @@
+# resources/crops.yaml
+#
+# IMPORTANTE: dividido en dos listas porque no todos los cultivos "reales"
+# del Estado de México existen para el motor de simulación.
+#
+# Fuente de verdad para engine_recognized: CROP_CELL_MAP en
+# ethosterra-python/ethosterra/agents/agro_ecosystem.py (EthosTerra.zip).
+# Cualquier crop_type que NO esté en esa lista cae en el default
+# `MaizCell` sin lanzar error ni warning -- es un fallback silencioso.
+# Verificalo tú mismo en agro_ecosystem.py línea ~297 si migras de versión.
+
+engine_recognized:
+  # valor_canonico: [sinónimos aceptados por CROP_CELL_MAP.get(x.lower())]
+  maiz: [maiz, maíz, corn]
+  frijol: [frijol, beans, frijoles]
+  arroz: [arroz, rice]
+  cafe: [cafe, café, coffee]
+  platano: [platano, plátano, banana, plantain]
+  vegetables: [vegetables, verduras, hortalizas]
+  roots_or_yam: [roots, yam, name, raices, raíces, ñame]
+  # Nota: "name"/"yam"/"roots" son sinónimos entre sí en el código (todos
+  # mapean a NameCell), se agrupan aquí como una sola familia.
+
+# Cultivos reales y comunes en el Estado de México (petición sección 10 del
+# resumen ejecutivo) que el motor NO implementa todavía. Úsalos libremente
+# en la narrativa / activation_when / description -- son buen vocabulario
+# de dominio para que el LLM entienda al agricultor -- pero NUNCA como
+# valor de crop_type en set_land_crop_type o agro_ecosystem_operation,
+# porque terminarán tratándose como maíz sin que nadie se entere.
+regional_edomex_narrative_only:
+  - trigo
+  - avena
+  - haba
+  - cebada
+  - papa
+  - alfalfa
+  - nopal
+  - calabaza
+  - chile
+  - jitomate
+
+# Sugerencia de uso en prompt.py (no aplicado, solo referencia):
+# "Si la narrativa menciona un cultivo de regional_edomex_narrative_only,
+#  descríbelo en el texto/description del goal, pero si el plan necesita
+#  un crop_type ejecutable, usa el valor más cercano de engine_recognized
+#  (ej. avena/cebada/trigo -> maiz como aproximación de cereal de temporal)
+#  y dilo explícitamente en emit_episode para que quede trazable."

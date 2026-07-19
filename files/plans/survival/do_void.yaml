@@ -1,0 +1,23 @@
+# PlanSpec: do_void_plan_v1
+# Equivalent to DoVoidTask.java
+id: do_void_plan_v1
+version: "1.0"
+description: "Resolve the waiting state by resetting the flag."
+
+preconditions:
+  - "belief.get('waiting') == true"
+
+steps:
+  - id: reset_waiting_flag
+    action: update_belief
+    args:
+      key: waiting
+      value: false
+      description: "Exit wait state"
+
+on_failure:
+  - id: log_void_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "do_void_plan failed for agent {agent_id}"

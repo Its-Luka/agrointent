@@ -1,0 +1,19 @@
+# GoalSpec: do_healthcare
+# Equivalent to DoHealthCareGoal.java
+id: do_healthcare
+version: "1.0"
+description: "Agent needs to perform health care activities when health is low."
+priority: 100
+pyramid_level: SURVIVAL
+
+# Activation logic from Java:
+# if (this.isAlreadyExecutedToday(believes)) return 0;
+# if (money > 2000000) threshold = 60; else threshold = 30;
+# if (health < threshold) return 1; else return 0;
+
+activation_when: "!state.isTaskExecutedToday('do_healthcare') && state.hasHealthBelow(state.hasMoney(2000000) ? 60 : 30)"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: do_healthcare_plan_v1

@@ -1,0 +1,37 @@
+# PlanSpec: waste_time_and_resources_plan_v1
+# Equivalent to WasteTimeAndResourcesTask.java execution
+
+id: waste_time_and_resources_plan_v1
+version: "1.0"
+description: "Waste time and money in social activities."
+
+steps:
+  - id: consume_all_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 1440
+
+  - id: waste_money
+    action: increment_belief
+    args:
+      key: money
+      amount: -100000
+      min: -100000
+      max: -1000 # Randomly waste between 1k and 100k
+
+  - id: emit_waste_emotion
+    action: emit_emotion
+    args:
+      event: "FAMILY"
+      type: "LEISURE"
+      charac: "MONEY"
+
+  - id: record_waste_episode
+    action: emit_episode
+    args:
+      text: "He gastado una cantidad considerable de dinero y tiempo en actividades sociales improductivas."
+      tags: [leisure, waste, money]
+
+on_timeout: []
+on_failure: []

@@ -1,0 +1,15 @@
+# GoalSpec: provide_collaboration
+# Equivalent to ProvideCollaborationGoal.java
+# Triggered when an agent with 'worker' purpose is available to help others.
+
+id: provide_collaboration
+version: "1.0"
+display_name: "Ofrecer Colaboración Social"
+description: "Offer help to other peasants when acting as a worker without a current contract."
+pyramid_level: NEED
+plan_ref: provide_collaboration_plan_v1
+
+activation_when: "state.isWorker() && !state.askedForContractor"
+
+contribution_rules:
+  fixed_value: 0.8

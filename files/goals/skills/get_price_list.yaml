@@ -1,0 +1,35 @@
+# GoalSpec: get_price_list
+# Equivalent to GetPriceListGoal.java (L4SkillsResources)
+# Agent requests market prices when priceList is empty or stale.
+#
+# Java detectGoal: priceList.isEmpty() || isUpdatePriceList() → return 1
+# Java evaluatePlausibility: haveTimeAvailable(GetPriceListTask)
+
+id: get_price_list
+version: "1.0"
+display_name: "Consultar lista de precios"
+description: |
+  El agente consulta al mercado la lista de precios actualizada de insumos
+  y cosechas cuando no dispone de precios o la lista está desactualizada.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "belief.get('price_list_empty') == true || belief.get('update_price_list') == true"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: get_price_list_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: update_price_list
+        op: set
+        value: false
+    episodes:
+      - text: "Consulté los precios actuales del mercado el día {belief.get('current_day')}."
+        tags: [market, price_list, information]
+
+normative_tags: []

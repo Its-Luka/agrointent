@@ -1,0 +1,46 @@
+# PlanSpec: do_healthcare_plan_v1
+# Equivalent to DoHealthCareTask.java
+id: do_healthcare_plan_v1
+version: "1.0"
+description: "Execute health care activities: consume time and improve health."
+
+preconditions:
+  - "belief.get('health') < 60"
+
+steps:
+  - id: consume_healthcare_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 720
+      description: "Time spent on health care (12 hours)"
+
+  - id: improve_health
+    action: increase_health
+    args:
+      description: "Perform medical checkups or rest to improve health."
+
+  - id: record_healthcare_episode
+    action: emit_episode
+    args:
+      text: "Invertí tiempo en el cuidado de mi salud para recuperarme."
+      tags: [health, survival, medical]
+
+  - id: update_emotional_state
+    action: emit_emotion
+    args:
+      axis: happiness
+      delta: 0.05
+
+  - id: set_executed_flag
+    action: update_belief
+    args:
+      key: already_executed_do_healthcare
+      value: true
+
+on_failure:
+  - id: log_healthcare_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "do_healthcare_plan failed for agent {agent_id}"

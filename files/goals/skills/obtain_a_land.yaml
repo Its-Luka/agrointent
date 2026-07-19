@@ -1,0 +1,31 @@
+# GoalSpec: obtain_a_land
+# Equivalent to ObtainALandGoal.java (L4SkillsResources)
+# Agent requests a land parcel from CivicAuthority when they don't have a farm yet.
+#
+# Java detectGoal: !farmName && !workerWithoutLand → return 1
+# Java evaluateViability: health > 0
+
+id: obtain_a_land
+version: "1.0"
+display_name: "Obtener una parcela de tierra"
+description: |
+  El agente solicita una parcela agrícola a la Autoridad Cívica cuando aún
+  no tiene acceso a tierras de cultivo y puede trabajarlas.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "belief.get('has_farm') == false && belief.get('worker_without_land') == false"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_a_land_plan_v1
+
+effects:
+  on_success:
+    episodes:
+      - text: "Solicité una parcela de tierra a la Autoridad Cívica el día {belief.get('current_day')}."
+        tags: [land, civic_authority, resources]
+
+normative_tags: []

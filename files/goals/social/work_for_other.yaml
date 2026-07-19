@@ -1,0 +1,15 @@
+# GoalSpec: work_for_other
+# Equivalent to WorkForOtherGoal.java
+# Activates when the peasant has contracted days to work for another family.
+
+id: work_for_other
+version: "1.0"
+display_name: "Trabajar para Otro"
+description: "Fulfill labor contract by working for another peasant family."
+pyramid_level: OPORTUNITY
+plan_ref: work_for_other_plan_v1
+
+activation_when: "state.daysToWorkForOther > 0"
+
+contribution_rules:
+  fixed_value: 0.98

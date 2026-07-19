@@ -1,0 +1,32 @@
+# GoalSpec: obtain_pesticides
+# Equivalent to ObtainPesticidesGoal.java (L4SkillsResources)
+# Agent buys pesticides when resourceNeededType == PESTICIDE.
+
+id: obtain_pesticides
+version: "1.0"
+display_name: "Obtener pesticidas"
+description: |
+  El agente compra pesticidas al mercado cuando sus cultivos requieren
+  tratamiento fitosanitario.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "state.needsPesticides() && state.isPriceListAvailable()"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_pesticides_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: resource_needed_type
+        op: set
+        value: NONE
+    episodes:
+      - text: "Compré pesticidas en el mercado el día {belief.get('current_day')}."
+        tags: [pesticides, market, resources]
+
+normative_tags: []

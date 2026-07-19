@@ -1,0 +1,15 @@
+# GoalSpec: attend_religious_events
+# Equivalent to AttendReligiousEventsGoal.java
+# Activates on Sundays for spiritual well-being.
+
+id: attend_religious_events
+version: "1.0"
+display_name: "Asistir a Eventos Religiosos"
+description: "Attend religious services to improve spiritual health."
+pyramid_level: OPORTUNITY
+plan_ref: attend_religious_events_plan_v1
+
+activation_when: "true"
+
+contribution_rules:
+  fixed_value: 0.98

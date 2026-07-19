@@ -1,0 +1,31 @@
+# GoalSpec: get_training
+# Equivalent to GetTrainingGoal.java (L4SkillsResources)
+# Agent seeks training when trainingLevel < 1 and training is relevant/available.
+#
+# Java detectGoal:   trainingLevel < 1 → return 1
+# Java evaluateViability: trainingRelevance > 0 && trainingAvailability > 0
+
+id: get_training
+version: "1.0"
+display_name: "Capacitación agrícola"
+description: |
+  El agente busca capacitación técnica cuando su nivel de formación es
+  insuficiente y hay disponibilidad de cursos o asistencia.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "state.trainingLevel < 1"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: get_training_plan_v1
+
+effects:
+  on_success:
+    episodes:
+      - text: "Completé una sesión de capacitación agrícola el día {belief.get('current_day')}."
+        tags: [training, skills, education]
+
+normative_tags: []

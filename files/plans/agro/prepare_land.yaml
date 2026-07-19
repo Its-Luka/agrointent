@@ -1,0 +1,26 @@
+# PlanSpec: prepare_land_plan_v1
+# Equivalent to PrepareLandTask.java execution
+
+id: prepare_land_plan_v1
+version: "1.0"
+description: "Execute land preparation steps."
+
+steps:
+  - id: set_crop
+    action: set_land_crop_type
+    args:
+      crop_type: "maiz"
+
+  - id: prepare_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "PREPARE"
+
+  - id: record_prepare_episode
+    action: emit_episode
+    args:
+      text: "He trabajado en la preparación del terreno para asegurar un suelo fértil para la próxima siembra."
+      tags: [agro, prepare, land]
+
+on_timeout: []
+on_failure: []

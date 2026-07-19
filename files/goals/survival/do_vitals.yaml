@@ -1,0 +1,42 @@
+# GoalSpec: do_vitals
+# Equivalent to DoVitalsGoal.java (L1Survival)
+# The simplest goal in the system — always detected at start of new day,
+# always viable, fixed contribution 0.99.
+
+id: do_vitals
+version: "1.0"
+display_name: "Necesidades vitales diarias"
+description: |
+  Al inicio de cada día de simulación, el agente realiza sus actividades
+  vitales básicas: alimentación, hidratación y descanso mínimo. Esta meta
+  es siempre viable y tiene la contribución más alta después del baseline
+  de supervivencia pura. Su detección depende únicamente de que sea un
+  día nuevo no procesado.
+
+pyramid_level: SURVIVAL
+sub_level: L1_SURVIVAL
+
+activation_when: "state.isNewDay()"
+
+contribution_rules:
+  fixed_value: 0.99
+  rules:
+    - then: "contribution IS 0.99"
+      default: true
+
+plan_ref: do_vitals_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: new_day
+        op: set
+        value: false
+    emotional:
+      - happiness: 0.05
+      - hopeful: 0.03
+    episodes:
+      - text: "Realicé las actividades vitales del día {belief.get('current_day')}."
+        tags: [vitals, daily, survival]
+
+normative_tags: []

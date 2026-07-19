@@ -1,0 +1,21 @@
+# PlanSpec: check_crops_plan_v1
+# Equivalent to CheckCropsTask.java
+
+id: check_crops_plan_v1
+version: "1.0"
+description: "Send CROP_INFORMATION to growing crops."
+
+steps:
+  - id: check_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "CHECK"
+
+  - id: record_check_episode
+    action: emit_episode
+    args:
+      text: "He salido a revisar cómo van los cultivos. Es importante estar pendiente de cualquier cambio o necesidad de las plantas."
+      tags: [agro, check, care]
+
+on_timeout: []
+on_failure: []

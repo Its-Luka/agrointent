@@ -1,0 +1,502 @@
+[
+  {
+    "name": "land_1",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_2",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_3",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_4",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_5",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_6",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_7",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_8",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_9",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_10",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_11",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_12",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_13",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_14",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_15",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_16",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_17",
+    "kind": "water",
+    "coordinates": []
+  },
+  {
+    "name": "land_18",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_19",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_20",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_21",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_22",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_23",
+    "kind": "road",
+    "coordinates": []
+  },
+  {
+    "name": "land_24",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_25",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_26",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_27",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_28",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_29",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_30",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_31",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_32",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_33",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_34",
+    "kind": "water",
+    "coordinates": []
+  },
+  {
+    "name": "land_35",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_36",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_37",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_38",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_39",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_40",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_41",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_42",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_43",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_44",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_45",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_46",
+    "kind": "road",
+    "coordinates": []
+  },
+  {
+    "name": "land_47",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_48",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_49",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_50",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_51",
+    "kind": "water",
+    "coordinates": []
+  },
+  {
+    "name": "land_52",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_53",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_54",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_55",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_56",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_57",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_58",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_59",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_60",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_61",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_62",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_63",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_64",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_65",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_66",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_67",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_68",
+    "kind": "water",
+    "coordinates": []
+  },
+  {
+    "name": "land_69",
+    "kind": "road",
+    "coordinates": []
+  },
+  {
+    "name": "land_70",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_71",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_72",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_73",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_74",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_75",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_76",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_77",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_78",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_79",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_80",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_81",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_82",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_83",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_84",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_85",
+    "kind": "water",
+    "coordinates": []
+  },
+  {
+    "name": "land_86",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_87",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_88",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_89",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_90",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_91",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_92",
+    "kind": "road",
+    "coordinates": []
+  },
+  {
+    "name": "land_93",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_94",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_95",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_96",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_97",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_98",
+    "kind": "land",
+    "coordinates": []
+  },
+  {
+    "name": "land_99",
+    "kind": "forest",
+    "coordinates": []
+  },
+  {
+    "name": "land_100",
+    "kind": "land",
+    "coordinates": []
+  }
+]

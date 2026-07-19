@@ -1,0 +1,28 @@
+# GoalSpec: obtain_livestock
+# Equivalent to ObtainLivestockGoal.java (L4SkillsResources)
+# Agent buys livestock when tools < 1 (used as proxy for livestock need in original code).
+
+id: obtain_livestock
+version: "1.0"
+display_name: "Obtener ganado"
+description: |
+  El agente compra ganado al mercado cuando sus recursos de trabajo
+  (herramientas) son insuficientes para mantener las actividades pecuarias.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "belief.get('tools') < 1"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_livestock_plan_v1
+
+effects:
+  on_success:
+    episodes:
+      - text: "Adquirí ganado en el mercado el día {belief.get('current_day')}."
+        tags: [livestock, market, resources]
+
+normative_tags: []

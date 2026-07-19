@@ -1,0 +1,16 @@
+# GoalSpec: deforest_land
+# Equivalent to DeforestingLandTask.java
+# Activates when there is forest land available for clearing.
+
+id: deforest_land
+version: "1.0"
+display_name: "Deforestar Tierra"
+description: "Clear forest land to make it suitable for agriculture."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: deforest_land_plan_v1
+
+# Check if any land is of kind forest
+activation_when: "state.hasLandWithKind('forest')"
+
+contribution_rules:
+  fixed_value: 0.7 # High priority if expanding land

@@ -1,0 +1,37 @@
+# GoalSpec: obtain_supplies
+# Equivalent to ObtainSuppliesGoal.java (L4SkillsResources)
+# NOTE: Original Java detectGoal always returns 0 (disabled).
+# Keeping activation_when as false to preserve the disabled state intentionally.
+# Can be re-enabled by setting activation_when to a real condition.
+
+id: obtain_supplies
+version: "1.0"
+display_name: "Obtener suministros"
+description: |
+  El agente compra suministros generales al mercado cuando no tiene
+  suficientes para mantener sus actividades agrícolas.
+  (Actualmente desactivado — la condición de activación se puede habilitar según se necesite.)
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+# Original Java always returned 0 from detectGoal → disabled intentionally.
+# Use "belief.get('supplies') < 1" to re-enable when supplies tracking is active.
+activation_when: "false"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_supplies_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: resource_needed_type
+        op: set
+        value: NONE
+    episodes:
+      - text: "Adquirí suministros en el mercado el día {belief.get('current_day')}."
+        tags: [supplies, market, resources]
+
+normative_tags: []

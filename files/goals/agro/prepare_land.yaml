@@ -1,0 +1,16 @@
+# GoalSpec: prepare_land
+# Equivalent to PrepareLandGoal.java
+# Activates when there are lands of kind 'land' that haven't been prepared (Season NONE).
+
+id: prepare_land
+version: "1.0"
+display_name: "Preparar Terreno"
+description: "Prepare the land for the next planting season."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: prepare_land_plan_v1
+
+# Check if any land is of kind 'land' and unprepared (NONE or FALLOW after harvest)
+activation_when: "state.hasLandWithSeason('NONE') || state.hasLandWithSeason('FALLOW')"
+
+contribution_rules:
+  fixed_value: 0.6

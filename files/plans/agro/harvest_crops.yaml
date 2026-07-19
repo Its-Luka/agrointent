@@ -1,0 +1,21 @@
+# PlanSpec: harvest_crops_plan_v1
+# Equivalent to HarvestCropsGoal.java execution
+
+id: harvest_crops_plan_v1
+version: "1.0"
+description: "Execute crop harvesting steps."
+
+steps:
+  - id: harvest_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "HARVEST"
+
+  - id: record_harvest_episode
+    action: emit_episode
+    args:
+      text: "¡Gran día! Hemos cosechado los frutos de nuestro trabajo. Es momento de procesar la cosecha y asegurar el sustento de la familia."
+      tags: [agro, harvest, crop]
+
+on_timeout: []
+on_failure: []

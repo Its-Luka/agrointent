@@ -1,0 +1,35 @@
+# PlanSpec: obtain_supplies_plan_v1
+# Equivalent to ObtainSuppliesTask.java execution
+# Sends BUY_SUPPLIES event to MarketPlace.
+
+id: obtain_supplies_plan_v1
+version: "1.0"
+description: "Purchase general supplies from the MarketPlace agent."
+
+steps:
+  - id: consume_supplies_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: ObtainToolsTask # Original Java used ObtainToolsTask time for supplies
+
+  - id: buy_supplies
+    action: send_marketplace_event
+    args:
+      message_type: BUY_SUPPLIES
+      quantity: 10
+      reset_resource_needed: true
+
+  - id: record_supplies_episode
+    action: emit_episode
+    args:
+      text: "Compré suministros generales en el mercado."
+      tags: [supplies, market, resources]
+
+on_timeout: []
+on_failure:
+  - id: log_supplies_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_supplies_plan failed for agent {agent_id}"

@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wellprodsim.wps/specs/PlanSpec.schema.json",
+  "title": "PlanSpec",
+  "description": "Declarative specification for a BDI plan in WellProdSim. Plans are sequences of primitive actions loaded from YAML files in the plans/ directory.",
+  "type": "object",
+  "required": ["id", "version", "steps"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Unique snake_case identifier. Must match the plan_ref field in the GoalSpec that references this plan."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Semantic version (MAJOR.MINOR)."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of what this plan does."
+    },
+    "preconditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "MVEL2 boolean expressions evaluated against 'belief' context before executing steps. All must be true for the plan to start.",
+      "default": []
+    },
+    "steps": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/PlanStep" },
+      "minItems": 1,
+      "description": "Ordered sequence of primitive action steps."
+    },
+    "on_timeout": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/PlanStep" },
+      "description": "Steps executed if any wait_for_event step times out.",
+      "default": []
+    },
+    "on_failure": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/PlanStep" },
+      "description": "Steps executed if any step returns FAILURE.",
+      "default": []
+    }
+  },
+  "definitions": {
+    "PlanStep": {
+      "type": "object",
+      "required": ["id", "action"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "Local step identifier, unique within this plan. Used in logs and debugging."
+        },
+        "action": {
+          "type": "string",
+          "description": "Name of a registered primitive action (must exist in ActionRegistry). Available actions: send_event, wait_for_event, update_belief, increment_belief, consume_resource, select_from_collection, emit_episode, emit_emotion, assert_fact, retract_fact, query_beliefs, publish_stream, request_llm, log_audit, conditional, parallel, repeat_until.",
+          "enum": [
+            "send_event",
+            "wait_for_event",
+            "update_belief",
+            "increment_belief",
+            "consume_resource",
+            "select_from_collection",
+            "emit_episode",
+            "emit_emotion",
+            "assert_fact",
+            "retract_fact",
+            "query_beliefs",
+            "publish_stream",
+            "request_llm",
+            "log_audit",
+            "conditional",
+            "parallel",
+            "repeat_until"
+          ]
+        },
+        "args": {
+          "type": "object",
+          "description": "Arguments passed to the action. Keys and values are action-specific. String values may use {belief.key} or {bindings.varName} interpolation.",
+          "additionalProperties": true
+        },
+        "binds": {
+          "type": "string",
+          "description": "Variable name to store the action result in the plan's binding context. Used by subsequent steps via {bindings.varName}."
+        },
+        "condition": {
+          "type": "string",
+          "description": "MVEL2 expression. If provided, this step is only executed when the condition evaluates to true."
+        }
+      }
+    }
+  }
+}

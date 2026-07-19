@@ -1,0 +1,15 @@
+# GoalSpec: waste_time_and_resources
+# Equivalent to WasteTimeAndResourcesGoal.java
+# Active when there's excess money, potentially leading to parties or wasteful spending.
+
+id: waste_time_and_resources
+version: "1.0"
+display_name: "Gastar Tiempo y Recursos"
+description: "Waste time and money in non-productive social activities (e.g. parties)."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: waste_time_and_resources_plan_v1
+
+activation_when: "belief.get('money') > 0"
+
+contribution_rules:
+  fixed_value: 0.1

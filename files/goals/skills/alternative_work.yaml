@@ -1,0 +1,38 @@
+# GoalSpec: alternative_work
+# Equivalent to AlternativeWorkGoal.java (L4SkillsResources)
+# Agent works an alternative job (e.g. mototaxi) when money is below threshold
+# or when earlyalternative config flag is set.
+#
+# Java detectGoal logic:
+#   if (money <= pfagent.alternativethreshold || pfagent.earlyalternative) return 1;
+#
+# Java evaluateContribution logic:
+#   if (money < threshold) contribution = 0.9; else 0.6; → fuzzy blend
+
+id: alternative_work
+version: "1.0"
+display_name: "Trabajo alternativo"
+description: |
+  Cuando el dinero disponible de la familia cae por debajo del umbral de
+  subsistencia configurado, el agente busca trabajo alternativo (p.ej. mototaxi)
+  para obtener ingresos adicionales y estabilizar sus finanzas.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "belief.get('money') <= 1000000"
+
+contribution_rules:
+  fixed_value: 0.8
+
+plan_ref: alternative_work_plan_v1
+
+effects:
+  on_success:
+    emotional:
+      - work: 0.05
+    episodes:
+      - text: "Realicé trabajo alternativo para generar ingresos adicionales el día {belief.get('current_day')}."
+        tags: [alternative_work, income, skills]
+
+normative_tags: []

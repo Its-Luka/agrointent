@@ -1,0 +1,14 @@
+# GoalSpec: find_news
+# Equivalent to FindNewsGoal.java (currently disabled)
+
+id: find_news
+version: "1.0"
+display_name: "Buscar Noticias"
+description: "Look for news in the community."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: find_news_plan_v1
+
+activation_when: "false"
+
+contribution_rules:
+  fixed_value: 0.1

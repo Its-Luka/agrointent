@@ -1,0 +1,21 @@
+# PlanSpec: sell_crop_plan_v1
+# Equivalent to SellCropTask.java execution
+
+id: sell_crop_plan_v1
+version: "1.0"
+description: "Execute crop selling steps."
+
+steps:
+  - id: sell_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "SELL"
+
+  - id: record_sell_episode
+    action: emit_episode
+    args:
+      text: "He vendido la cosecha en el mercado. Con este dinero podremos cubrir las necesidades de la familia y reinvertir en la finca."
+      tags: [agro, sell, market]
+
+on_timeout: []
+on_failure: []

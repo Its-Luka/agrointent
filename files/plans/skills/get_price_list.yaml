@@ -1,0 +1,47 @@
+# PlanSpec: get_price_list_plan_v1
+# Equivalent to GetPriceListTask.java execution
+# Sends ASK_FOR_PRICE_LIST event to MarketPlace and marks price list as not needing update.
+
+id: get_price_list_plan_v1
+version: "1.0"
+description: "Request the current market price list from the MarketPlace agent."
+
+steps:
+  - id: consume_price_list_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      description: "Time spent requesting price list"
+      time_key: GetPriceListTask
+
+  - id: reset_activity_type
+    action: update_belief
+    args:
+      key: current_activity
+      value: NONE
+
+  - id: request_price_list
+    action: send_marketplace_event
+    args:
+      message_type: ASK_FOR_PRICE_LIST
+      reset_resource_needed: false
+
+  - id: mark_price_list_not_stale
+    action: update_belief
+    args:
+      key: update_price_list
+      value: false
+
+  - id: record_price_list_episode
+    action: emit_episode
+    args:
+      text: "Consulté la lista de precios actualizada del mercado."
+      tags: [market, price_list, information]
+
+on_timeout: []
+on_failure:
+  - id: log_price_list_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "get_price_list_plan failed for agent {agent_id}"

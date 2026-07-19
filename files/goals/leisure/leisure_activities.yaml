@@ -1,0 +1,15 @@
+# GoalSpec: leisure_activities
+# Equivalent to LeisureActivitiesGoal.java
+# Active when there's money available for personal leisure.
+
+id: leisure_activities
+version: "1.0"
+display_name: "Actividades de Ocio"
+description: "Engage in personal leisure activities when capital is available."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: leisure_activities_plan_v1
+
+activation_when: "belief.get('money') > 0"
+
+contribution_rules:
+  fixed_value: 0.2

@@ -1,0 +1,21 @@
+# PlanSpec: manage_pests_plan_v1
+# Equivalent to ManagePestsTask.java
+
+id: manage_pests_plan_v1
+version: "1.0"
+description: "Send CROP_PESTICIDE to growing crops."
+
+steps:
+  - id: pesticide_op
+    action: agro_ecosystem_operation
+    args:
+      operation: "PESTICIDE"
+
+  - id: record_pesticide_episode
+    action: emit_episode
+    args:
+      text: "Hoy tocó aplicar pesticida. No me gusta mucho, pero las plagas no dan tregua si uno se descuida."
+      tags: [agro, pesticide, care]
+
+on_timeout: []
+on_failure: []

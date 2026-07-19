@@ -1,0 +1,16 @@
+# GoalSpec: irrigate_crops
+# Equivalent to IrrigateCropsTask.java
+# Activates when crops need irrigation.
+
+id: irrigate_crops
+version: "1.0"
+display_name: "Regar Cultivos"
+description: "Water the crops if needed."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: irrigate_crops_plan_v1
+
+# Check if any land needs irrigation
+activation_when: "state.hasLandWithCropCare('IRRIGATION')"
+
+contribution_rules:
+  fixed_value: 0.6 # Important care task

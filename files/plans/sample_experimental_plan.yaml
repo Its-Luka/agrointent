@@ -1,0 +1,6 @@
+id: sample_experimental_plan
+steps:
+  - id: emit_exp
+    action: emit_episode
+    params:
+      text: "Executing experimental social goal"

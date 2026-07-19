@@ -1,0 +1,14 @@
+# GoalSpec: seek_purpose
+# Equivalent to SeekPurposeGoal.java
+id: seek_purpose
+version: "1.0"
+description: "Agent needs to find a purpose if it doesn't have one."
+priority: 100
+pyramid_level: SURVIVAL
+
+activation_when: "!state.hasPurpose()"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: seek_purpose_plan_v1

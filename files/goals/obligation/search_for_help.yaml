@@ -1,0 +1,15 @@
+# GoalSpec: search_for_help
+# Equivalent to SearchForHelpAndNecessityGoal.java
+# Activates when the family has very little money.
+
+id: search_for_help
+version: "1.0"
+display_name: "Buscar Ayuda por Necesidad"
+description: "Seek emergency assistance when money is critically low."
+pyramid_level: OPORTUNITY
+plan_ref: search_for_help_plan_v1
+
+activation_when: "state.peasantProfile.money <= 15000"
+
+contribution_rules:
+  fixed_value: 0.9

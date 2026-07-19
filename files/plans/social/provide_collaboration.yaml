@@ -1,0 +1,30 @@
+# PlanSpec: provide_collaboration_plan_v1
+# Equivalent to ProvideCollaborationTask.java execution
+# Offers help to the society agent and consumes remaining time.
+
+id: provide_collaboration_plan_v1
+version: "1.0"
+description: "Offer availability to help other peasants via the community dynamics agent."
+
+steps:
+  - id: buy_help_event
+    action: send_society_collaboration
+    args:
+      guard: org.wpsim.CommunityDynamics.Guards.CommunityDynamicsOffersHelpGuard
+      amount: 5
+      flag: asked_for_contractor
+
+  - id: consume_all_remaining_time
+    action: update_belief
+    args:
+      key: time_left_on_day
+      value: 120 # From PeasantFamilyBelieves.decreaseTime logic for "no more time"
+
+  - id: record_offer_episode
+    action: emit_episode
+    args:
+      text: "Me he puesto a disposición de la comunidad como trabajador para colaborar en las fincas de mis vecinos."
+      tags: [social, help, worker]
+
+on_timeout: []
+on_failure: []

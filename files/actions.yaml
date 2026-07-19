@@ -1,0 +1,149 @@
+# resources/actions.yaml
+#
+# Catálogo de acciones válidas para steps[].action en PlanSpec.
+#
+# Fuente de verdad: besa-python/besa/bdi/declarative/action_registry.py
+# (EthosTerra.zip). Verificado línea por línea contra los 37 plans/*.yaml
+# reales: las 17 acciones de abajo son EXACTAMENTE las que aparecen en uso,
+# ni una más ni una menos. Coincide con VALID_ACTIONS en tu schemas.py.
+#
+# OJO: el Resumen Ejecutivo original listaba solo 16 acciones y omitía
+# "conditional". Esta lista es la corregida.
+
+actions:
+  # --- Acciones de dominio agrícola ---
+  - name: agro_ecosystem_operation
+    category: agro
+    args:
+      operation:
+        type: string
+        enum: [PREPARE, PLANT, CHECK, IRRIGATE, PESTICIDE, HARVEST, DEFOREST, SELL]
+        required: true
+      crop_type:
+        type: string
+        required: false
+        note: >
+          Ver resources/crops.yaml -> engine_recognized. Si se manda un
+          crop_type no reconocido por CROP_CELL_MAP, el simulador usa
+          MaizCell por defecto SIN avisar (fallback silencioso).
+    description: >
+      Ejecuta una operación sobre el ciclo del cultivo (preparar terreno,
+      sembrar, revisar, regar, fumigar, cosechar, deforestar, vender).
+
+  - name: set_land_crop_type
+    category: agro
+    args:
+      crop_type:
+        type: string
+        required: false
+        default: maiz
+        note: "Mismo riesgo de fallback silencioso que arriba."
+    description: "Fija el tipo de cultivo de una parcela."
+
+  # --- Recursos y creencias (belief state) ---
+  - name: consume_resource
+    category: recursos
+    args:
+      key:
+        type: string
+        enum: [money, time_left_on_day, seeds, water_available, tools]
+        required: true
+      amount:
+        type: number
+        required: true
+    description: "Resta `amount` de una clave numérica del belief state."
+
+  - name: increment_belief
+    category: recursos
+    args:
+      key: {type: string, required: true}
+      amount: {type: number, required: true}
+    description: "Suma (o resta, si amount es negativo) a una creencia numérica, ej. money, days_in_crisis."
+
+  - name: update_belief
+    category: recursos
+    args:
+      key: {type: string, required: true}
+      value: {type: any, required: true}
+    description: "Sobrescribe directamente el valor de una creencia (no acumula, a diferencia de increment_belief)."
+
+  - name: increase_health
+    category: recursos
+    args: {}
+    description: "Incrementa la salud del agente (sin args documentados con nombre fijo; revisar action_registry.py si se necesita magnitud)."
+
+  # --- Narrativa / emociones ---
+  - name: emit_episode
+    category: narrativa
+    args:
+      text: {type: string, required: true}
+      tags: {type: array, items: string, required: false}
+    description: "Registra un recuerdo/evento narrativo en el log del agente."
+
+  - name: emit_emotion
+    category: narrativa
+    args:
+      axis:
+        type: string
+        enum: [happiness, hopeful, secure]
+        required: true
+      delta:
+        type: number
+        minimum: -1
+        maximum: 1
+        required: true
+    description: "Aplica un delta emocional sobre uno de los 3 ejes soportados."
+
+  # --- Social / comunidad ---
+  - name: send_society_collaboration
+    category: social
+    args: {}
+    description: "Solicita u ofrece colaboración a la comunidad. Usar solo si la narrativa lo pide explícitamente."
+
+  - name: spend_friends_time
+    category: social
+    args: {}
+    description: "Invierte tiempo social con amistades."
+
+  - name: send_marketplace_event
+    category: social
+    args: {}
+    description: "Emite un evento hacia el mercado (compra/venta)."
+
+  - name: send_civic_land_request
+    category: social
+    args: {}
+    description: "Solicita trámite civil relacionado con tierras."
+
+  # --- Sistema / control de flujo ---
+  - name: send_event
+    category: sistema
+    args: {}
+    description: "Emite un evento genérico del sistema BDI."
+
+  - name: sync_clock
+    category: sistema
+    args: {}
+    description: "Sincroniza el reloj de simulación del agente."
+
+  - name: log_audit
+    category: sistema
+    args: {}
+    description: "Escribe una entrada de auditoría."
+
+  - name: wait_for_event
+    category: sistema
+    args: {}
+    description: "Bloquea el paso hasta que ocurra un evento externo."
+
+  - name: conditional
+    category: sistema
+    args: {}
+    description: >
+      Bifurcación condicional dentro de un plan. Presente en el registro
+      real pero AUSENTE del Resumen Ejecutivo original (era la acción #17
+      que faltaba).
+
+# Todas las acciones de sistema/social deben usarse "solo si la narrativa
+# lo pide explícitamente" (regla ya presente en tu prompt.py actual, se
+# mantiene sin cambios).

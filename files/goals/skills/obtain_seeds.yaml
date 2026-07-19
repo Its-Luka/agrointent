@@ -1,0 +1,35 @@
+# GoalSpec: obtain_seeds
+# Equivalent to ObtainSeedsGoal.java (L4SkillsResources)
+# Agent buys seeds from the market when seeds < seedsNeeded and priceList is available.
+#
+# Java detectGoal: seeds < seedsNeeded && !priceList.isEmpty() → return 1
+# Java evaluateViability: money >= (priceList["seeds"].getCost() * seedsNeeded) → 1
+
+id: obtain_seeds
+version: "1.0"
+display_name: "Obtener semillas"
+description: |
+  El agente compra las semillas necesarias al mercado cuando no tiene
+  suficientes para la siembra planificada y dispone de presupuesto.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "state.needsSeeds() && state.isPriceListAvailable()"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_seeds_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: resource_needed_type
+        op: set
+        value: NONE
+    episodes:
+      - text: "Adquirí semillas en el mercado el día {belief.get('current_day')}."
+        tags: [seeds, market, resources]
+
+normative_tags: []

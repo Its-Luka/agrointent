@@ -1,0 +1,94 @@
+# WellProdSim — Goal Pyramid Configuration
+# Defines priority weights for each level of the DesireHierarchyPyramid.
+# Higher priority_weight = selected first when contribution scores are equal.
+# Maps to GoalBDITypes enum in BESA framework.
+
+levels:
+  SURVIVAL:
+    priority_weight: 110
+    java_enum: SURVIVAL
+    description: "Vital necessities — food, health, basic maintenance. Highest priority."
+    sub_levels:
+      L1_SURVIVAL:
+        priority_weight: 110
+        goals:
+          - do_vitals
+          - do_healthcare
+          - seek_purpose
+          - do_void
+          - self_evaluation
+
+  DUTY:
+    priority_weight: 100
+    java_enum: DUTY
+    description: "Financial and social obligations that must be met."
+    sub_levels:
+      L2_OBLIGATION:
+        priority_weight: 100
+        goals:
+          - look_for_loan
+          - pay_debts
+
+  OPPORTUNITY:
+    priority_weight: 60
+    java_enum: OPPORTUNITY
+    description: "Productive, agricultural, and development activities."
+    sub_levels:
+      L3_PRODUCTIVE_DEVELOPMENT:
+        priority_weight: 65
+        goals:
+          - plant_crop
+          - harvest_crops
+          - check_crops
+          - prepare_land
+          - deforesting_land
+          - sell_crop
+          - sell_products
+          - manage_pests
+          - irrigate_crops
+          - attend_to_livestock
+          - process_products
+          - maintain_house
+          - attend_religious_events
+          - work_for_other
+          - search_for_help_and_necessity
+          - get_tech_assistance
+      L4_SKILLS_AND_RESOURCES:
+        priority_weight: 55
+        goals:
+          - obtain_seeds
+          - obtain_tools
+          - obtain_water
+          - obtain_pesticides
+          - obtain_supplies
+          - obtain_a_land
+          - obtain_livestock
+          - get_price_list
+          - get_training
+          - alternative_work
+
+  NEED:
+    priority_weight: 30
+    java_enum: NEED
+    description: "Social needs — collaboration, communication."
+    sub_levels:
+      L5_SOCIAL:
+        priority_weight: 30
+        goals:
+          - look_for_collaboration
+          - provide_collaboration
+          - communicate
+
+  ATTENTION_CYCLE:
+    priority_weight: 10
+    java_enum: ATTENTION_CYCLE
+    description: "Leisure and rest activities — lowest priority."
+    sub_levels:
+      L6_LEISURE:
+        priority_weight: 10
+        goals:
+          - spend_family_time
+          - spend_friends_time
+          - leisure_activities
+          - find_news
+          - waste_time_and_resources

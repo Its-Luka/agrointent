@@ -1,0 +1,35 @@
+# PlanSpec: obtain_water_plan_v1
+# Equivalent to ObtainWaterTask.java execution
+# Sends BUY_WATER event to MarketPlace.
+
+id: obtain_water_plan_v1
+version: "1.0"
+description: "Purchase irrigation water from the MarketPlace agent."
+
+steps:
+  - id: consume_water_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: ObtainWaterTask
+
+  - id: buy_water
+    action: send_marketplace_event
+    args:
+      message_type: BUY_WATER
+      quantity: 100
+      reset_resource_needed: true
+
+  - id: record_water_episode
+    action: emit_episode
+    args:
+      text: "Compré agua de riego para asegurar la hidratación de mis cultivos."
+      tags: [water, irrigation, market, resources]
+
+on_timeout: []
+on_failure:
+  - id: log_water_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_water_plan failed for agent {agent_id}"

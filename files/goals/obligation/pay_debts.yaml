@@ -1,0 +1,24 @@
+# GoalSpec: pay_debts
+# Equivalent to PayDebtsGoal.java
+id: pay_debts
+version: "1.0"
+description: "Agent pays off its loan if it has enough money."
+priority: 100
+pyramid_level: DUTY
+
+activation_when: "!state.isTaskExecutedToday('pay_debts') && state.peasantProfile.loanAmountToPay > 0 && state.hasMoney(state.peasantProfile.loanAmountToPay)"
+
+contribution_rules:
+  fuzzy_inputs:
+    - name: money
+      source: money
+      range: [0, 5000000]
+  rules:
+    - if: "money is HIGH"
+      then: "contribution is HIGH"
+    - if: "money is MEDIUM"
+      then: "contribution is MEDIUM"
+    - default: true
+      then: "contribution is LOW"
+
+plan_ref: pay_debts_plan_v1

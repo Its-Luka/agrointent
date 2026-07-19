@@ -1,0 +1,35 @@
+# PlanSpec: obtain_pesticides_plan_v1
+# Equivalent to ObtainPesticidesTask.java execution
+# Sends BUY_PESTICIDES event to MarketPlace.
+
+id: obtain_pesticides_plan_v1
+version: "1.0"
+description: "Purchase pesticides from the MarketPlace agent."
+
+steps:
+  - id: consume_pesticides_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: ObtainPesticidesTask
+
+  - id: buy_pesticides
+    action: send_marketplace_event
+    args:
+      message_type: BUY_PESTICIDES
+      quantity: 10
+      reset_resource_needed: true
+
+  - id: record_pesticides_episode
+    action: emit_episode
+    args:
+      text: "Compré pesticidas para el tratamiento de mis cultivos."
+      tags: [pesticides, market, resources]
+
+on_timeout: []
+on_failure:
+  - id: log_pesticides_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_pesticides_plan failed for agent {agent_id}"

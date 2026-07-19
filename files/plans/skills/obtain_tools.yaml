@@ -1,0 +1,35 @@
+# PlanSpec: obtain_tools_plan_v1
+# Equivalent to ObtainToolsTask.java execution
+# Sends BUY_TOOLS event to MarketPlace.
+
+id: obtain_tools_plan_v1
+version: "1.0"
+description: "Purchase tools from the MarketPlace agent."
+
+steps:
+  - id: consume_tools_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      description: "Time spent obtaining tools"
+      time_key: ObtainToolsTask
+
+  - id: buy_tools
+    action: send_marketplace_event
+    args:
+      message_type: BUY_TOOLS
+      reset_resource_needed: true
+
+  - id: record_tools_episode
+    action: emit_episode
+    args:
+      text: "Compré las herramientas necesarias para las actividades agrícolas."
+      tags: [tools, market, resources]
+
+on_timeout: []
+on_failure:
+  - id: log_tools_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "obtain_tools_plan failed for agent {agent_id}"

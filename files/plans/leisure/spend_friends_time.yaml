@@ -1,0 +1,20 @@
+# PlanSpec: spend_friends_time_plan_v1
+# Equivalent to SpendFriendsTimeTask.java execution
+
+id: spend_friends_time_plan_v1
+version: "1.0"
+description: "Spend time with friends/neighbors."
+
+steps:
+  - id: friends_logic
+    action: spend_friends_time
+    args: {}
+
+  - id: record_friends_episode
+    action: emit_episode
+    args:
+      text: "He pasado tiempo con amigos y vecinos de la comunidad."
+      tags: [leisure, friends, social]
+
+on_timeout: []
+on_failure: []

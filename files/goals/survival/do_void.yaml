@@ -1,0 +1,14 @@
+# GoalSpec: do_void
+# Equivalent to DoVoidGoal.java
+id: do_void
+version: "1.0"
+description: "Agent is in a waiting state and needs to process it."
+priority: 110 # Very high priority to resolve wait state
+pyramid_level: SURVIVAL
+
+activation_when: "belief.get('waiting') == true"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: do_void_plan_v1

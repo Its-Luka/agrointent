@@ -1,0 +1,33 @@
+# GoalSpec: obtain_water
+# Equivalent to ObtainWaterGoal.java (L4SkillsResources)
+# Agent buys water when resourceNeededType == WATER and has enough money (>= 1,000,000 COP).
+# Only activated when irrigation is enabled (params.irrigation == 1 in PeasantFamily.java).
+
+id: obtain_water
+version: "1.0"
+display_name: "Obtener agua de riego"
+description: |
+  El agente compra agua de riego al mercado cuando sus cultivos la necesitan
+  y dispone de suficiente dinero para adquirirla.
+
+pyramid_level: REQUIREMENT
+sub_level: L4_SKILLS
+
+activation_when: "state.needsWater() && state.hasMoney(1000000) && state.isPriceListAvailable()"
+
+contribution_rules:
+  fixed_value: 1.0
+
+plan_ref: obtain_water_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: resource_needed_type
+        op: set
+        value: NONE
+    episodes:
+      - text: "Compré agua de riego para los cultivos el día {belief.get('current_day')}."
+        tags: [water, irrigation, market, resources]
+
+normative_tags: []

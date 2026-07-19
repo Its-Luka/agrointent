@@ -1,0 +1,56 @@
+# resources/hazards.yaml
+#
+# Fuente de verdad: ethosterra-python/ethosterra/agents/perturbation_generator.py
+# (genera los eventos) y ethosterra-python/ethosterra/guards/natural_phenomena.py
+# (consume los eventos y aplica efectos sobre el belief state). EthosTerra.zip.
+
+engine_events:
+  - event_type: drought
+    es: sequía
+    generated_by: perturbation_generator.py (probabilidad base 0.05, duración 15-45 días)
+    mechanical_effect: >
+      Reduce water_available en 5, reduce food_security en 0.1*severidad.
+      Efecto real y verificado en natural_phenomena.py.
+
+  - event_type: flood
+    es: inundación
+    generated_by: perturbation_generator.py (probabilidad base 0.03, duración 5-15 días)
+    mechanical_effect: >
+      Pone lands[0].stage = FALLOW, reduce tools en 1.
+      Efecto real y verificado en natural_phenomena.py.
+
+  - event_type: plague
+    es: plaga
+    generated_by: perturbation_generator.py (probabilidad base 0.04, duración 20-60 días)
+    mechanical_effect: >
+      Reduce crop_health en 0.2*severidad, aumenta pest_pressure en
+      0.3*severidad sobre lands[0]. Efecto real y verificado en
+      natural_phenomena.py.
+
+  - event_type: earthquake
+    es: sismo / terremoto
+    generated_by: perturbation_generator.py (probabilidad base 0.01, duración 1-4 días)
+    mechanical_effect: >
+      ADVERTENCIA: perturbation_generator.py SÍ genera este evento, pero
+      natural_phenomena.py NO tiene una rama "elif msg.event_type ==
+      'earthquake'" -- el evento se dispara y no pasa nada mecánicamente.
+      Es un hueco real en EthosTerra, no un error de esta hoja de recursos.
+      Si tu narrativa menciona un sismo, quedará bien en emit_episode pero
+      no debe usarse como base de un activation_when que dependa de un
+      cambio de belief, porque ese cambio no ocurre.
+
+# Riesgos reales y comunes en el Edo. de México que el motor de
+# perturbaciones NO simula todavía (no hay probabilidad ni guard para
+# ellos). Útiles para la narrativa, inútiles como fundamento de un
+# activation_when basado en belief.get(...).
+regional_narrative_only:
+  - helada          # frost
+  - granizada       # hail
+  - erosion_suelo   # soil erosion, común en laderas del Edomex
+  - escasez_de_mano_de_obra   # labor shortage por migración
+
+# Regla sugerida para el LLM (referencia, no aplicada en prompt.py):
+# si la narrativa describe un hazard de regional_narrative_only, el goal
+# puede seguir siendo válido (ej. activation_when sobre food_security o
+# money bajos), pero no inventes una belief key nueva solo para ese
+# hazard -- usa las belief_keys ya documentadas en prompt.py.

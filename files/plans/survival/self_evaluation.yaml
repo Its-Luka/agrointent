@@ -1,0 +1,26 @@
+# PlanSpec: self_evaluation_plan_v1
+# Equivalent to SelfEvaluationTask.java
+id: self_evaluation_plan_v1
+version: "1.0"
+description: "Synchronize agent's internal clock."
+
+preconditions: []
+
+steps:
+  - id: sync_clock
+    action: sync_clock
+    args:
+      description: "Update internal date to match simulation current date."
+
+  - id: set_executed_flag
+    action: update_belief
+    args:
+      key: already_executed_self_evaluation
+      value: true
+
+on_failure:
+  - id: log_evaluation_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "self_evaluation_plan failed for agent {agent_id}"

@@ -1,0 +1,14 @@
+# GoalSpec: self_evaluation
+# Equivalent to SelfEvaluationGoal.java
+id: self_evaluation
+version: "1.0"
+description: "Agent synchronizes internal state with simulation time periodically."
+priority: 90
+pyramid_level: SURVIVAL
+
+activation_when: "(belief.get('already_executed_self_evaluation') == false) && (calendar.getDaysBetweenDates(state.getInternalCurrentDate()) < -7)"
+
+contribution_rules:
+  fixed_value: 0.9
+
+plan_ref: self_evaluation_plan_v1

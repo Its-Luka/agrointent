@@ -1,0 +1,54 @@
+# PlanSpec: do_vitals_plan_v1
+# Equivalent to DoVitalsTask.java execution
+# Simplest possible plan: consume time, update state, emit episode.
+# No BESA events sent externally — vitals are purely internal.
+
+id: do_vitals_plan_v1
+version: "1.0"
+description: "Execute daily vital activities: food, water, rest. Resets new_day flag."
+
+preconditions:
+  - "belief.get('new_day') == true"
+
+steps:
+  - id: consume_daily_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 720
+      description: "Time for eating, drinking, and basic rest (12 hours)"
+
+  - id: notify_simulation_control
+    action: send_event
+    args:
+      to: SimulationControl
+      type: PEASANT_VITALS_DONE
+      payload:
+        agent_id: "{agent_id}"
+        sim_time: "{sim_time}"
+
+  - id: reset_new_day_flag
+    action: update_belief
+    args:
+      key: new_day
+      value: false
+
+  - id: record_vitals_episode
+    action: emit_episode
+    args:
+      text: "Realicé mis actividades vitales del día. Me alimenté y descansé lo necesario."
+      tags: [vitals, daily, survival]
+
+  - id: update_emotional_state
+    action: emit_emotion
+    args:
+      axis: happiness
+      delta: 0.05
+
+on_timeout: []
+on_failure:
+  - id: log_vitals_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "do_vitals_plan failed for agent {agent_id} at sim_time {sim_time}"

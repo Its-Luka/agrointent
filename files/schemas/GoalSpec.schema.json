@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wellprodsim.wps/specs/GoalSpec.schema.json",
+  "title": "GoalSpec",
+  "description": "Declarative specification for a BDI goal in WellProdSim. Goals are loaded at runtime from YAML files in the goals/ directory without recompilation.",
+  "type": "object",
+  "required": ["id", "version", "pyramid_level", "activation_when", "contribution_rules", "plan_ref"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Unique snake_case identifier for this goal. Must be stable across versions."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Semantic version (MAJOR.MINOR). Increment MINOR for compatible changes, MAJOR for breaking changes to activation_when or effects."
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable name in Spanish for UI display and logging."
+    },
+    "description": {
+      "type": "string",
+      "description": "Full description of what this goal represents and when it is pursued."
+    },
+    "pyramid_level": {
+      "type": "string",
+      "enum": ["SURVIVAL", "DUTY", "OPPORTUNITY", "NEED", "ATTENTION_CYCLE"],
+      "description": "Level in the DesireHierarchyPyramid. Maps to GoalBDITypes enum: SURVIVAL > DUTY > OPPORTUNITY > NEED > ATTENTION_CYCLE."
+    },
+    "sub_level": {
+      "type": "string",
+      "enum": [
+        "L1_SURVIVAL",
+        "L2_OBLIGATION",
+        "L3_PRODUCTIVE_DEVELOPMENT",
+        "L4_SKILLS_AND_RESOURCES",
+        "L5_SOCIAL",
+        "L6_LEISURE"
+      ],
+      "description": "Fine-grained sub-level within pyramid_level for documentation and filtering."
+    },
+    "activation_when": {
+      "type": "string",
+      "minLength": 1,
+      "description": "MVEL2 boolean expression evaluated against a context variable 'belief' (BeliefRepository). Returns true when the goal should be detected. Example: \"belief.get('money') <= 500000 && !belief.get('haveLoan')\"."
+    },
+    "contribution_rules": {
+      "$ref": "#/definitions/ContributionRules"
+    },
+    "requires": {
+      "$ref": "#/definitions/Requirements"
+    },
+    "plan_ref": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "ID of the PlanSpec to execute when this goal is selected as intention. Must match a file in plans/{plan_ref}.yaml."
+    },
+    "effects": {
+      "$ref": "#/definitions/Effects"
+    },
+    "normative_tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tags referencing normative rules (e.g. 'law_0_community', 'law_1_family'). Used by NormativeFilter in GoalEngine (stub until normative module is implemented).",
+      "default": []
+    }
+  },
+  "definitions": {
+    "ContributionRules": {
+      "type": "object",
+      "description": "Fuzzy logic rules for computing how much this goal contributes to agent well-being [0,1].",
+      "required": ["rules"],
+      "additionalProperties": false,
+      "properties": {
+        "fixed_value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "If set, contribution is always this constant value (skips fuzzy evaluation). Use for simple goals like DoVitals."
+        },
+        "fuzzy_inputs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FuzzyInput" },
+          "description": "Belief values fed as fuzzy input variables. Required when rules use fuzzy terms."
+        },
+        "rules": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FuzzyRule" },
+          "minItems": 1,
+          "description": "FCL-style fuzzy rules. Use 'default' rule as fallback."
+        }
+      }
+    },
+    "FuzzyInput": {
+      "type": "object",
+      "required": ["name", "source", "range"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Variable name used in fuzzy rules (e.g. 'hope', 'health')."
+        },
+        "source": {
+          "type": "string",
+          "description": "Dot-path to belief value. Examples: 'emotional.hopeful', 'health', 'money'. Resolved via BeliefRepository.get()."
+        },
+        "range": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "[min, max] numeric range for this fuzzy variable."
+        }
+      }
+    },
+    "FuzzyRule": {
+      "type": "object",
+      "required": ["then"],
+      "additionalProperties": false,
+      "properties": {
+        "if": {
+          "type": "string",
+          "description": "Antecedent in natural FCL form. Omit for default rule. Example: \"hope IS HIGH and health IS GOOD\"."
+        },
+        "then": {
+          "type": "string",
+          "description": "Consequent. Example: \"contribution IS HIGH\". For numeric output: \"contribution IS 0.8\"."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Set true to mark as the fallback rule (no antecedent required)."
+        }
+      }
+    },
+    "Requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "type": "object",
+          "description": "Resources consumed when this goal executes. Keys are belief keys (e.g. 'seeds', 'time_minutes'). Values are minimum quantities required.",
+          "additionalProperties": { "type": "number" }
+        },
+        "skills": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skill identifiers the agent must have. Checked against 'skills' belief key.",
+          "default": []
+        }
+      }
+    },
+    "Effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "on_success": { "$ref": "#/definitions/EffectSet" },
+        "on_failure": { "$ref": "#/definitions/EffectSet" }
+      }
+    },
+    "EffectSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "beliefs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Belief mutation. Use 'set', 'increment', or 'decrement' with 'key' and 'value'.",
+            "additionalProperties": true
+          }
+        },
+        "emotional": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Emotional axis delta. Key is axis name (hopeful, happiness, security), value is float delta.",
+            "additionalProperties": { "type": "number" }
+          }
+        },
+        "episodes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EpisodeTemplate" }
+        }
+      }
+    },
+    "EpisodeTemplate": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Episode text template. Use {belief.key} interpolation for dynamic values."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        }
+      }
+    }
+  }
+}

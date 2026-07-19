@@ -1,0 +1,28 @@
+# GoalSpec: spend_family_time
+# Equivalent to SpendFamilyTimeGoal.java
+# Primary leisure goal, always active if time permits.
+
+id: spend_family_time
+version: "1.0"
+display_name: "Pasar tiempo en Familia"
+description: "Spend remaining day time with family members."
+pyramid_level: ATTENTION_CYCLE
+plan_ref: spend_family_time_plan_v1
+
+activation_when: "true"
+
+contribution_rules:
+  fuzzy_inputs:
+    - name: emotional_state
+      source: emotional_index
+      range: [0, 1]
+    - name: affinity
+      source: peasant_family_affinity
+      range: [0, 1]
+  rules:
+    - if: "emotional_state is HIGH or affinity is HIGH"
+      then: "contribution is HIGH"
+    - if: "emotional_state is MEDIUM and affinity is MEDIUM"
+      then: "contribution is MEDIUM"
+    - if: "emotional_state is LOW and affinity is LOW"
+      then: "contribution is LOW"

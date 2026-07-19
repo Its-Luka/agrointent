@@ -1,0 +1,37 @@
+# GoalSpec: community_meeting
+# Experimental goal to validate Stage 6 "Extension without code"
+# Activated on Mondays (day 1, 8, 15...) if social affinity is not too high.
+
+id: community_meeting
+version: "1.0"
+display_name: "Asistir a reunión comunitaria"
+description: |
+  Reunión semanal de los campesinos de la vereda para discutir temas de interés común.
+  Fomenta la cooperación y fortalece los lazos sociales.
+
+pyramid_level: SOCIAL
+sub_level: L5_SOCIAL
+
+# Activation: Monday (day of week 1) or if social_affinity < 0.3
+# In our system day 1 is Monday.
+activation_when: "state.currentDay % 7 == 1 || state.peasantProfile.socialAffinity < 0.3"
+
+contribution_rules:
+  fixed_value: 0.65
+
+plan_ref: community_meeting_plan_v1
+
+effects:
+  on_success:
+    beliefs:
+      - key: social_affinity
+        op: increment
+        value: 0.05
+    emotional:
+      - happiness: 0.05
+      - security: 0.02
+    episodes:
+      - text: "Asistí a la reunión comunitaria. Hablamos sobre el estado de las vías y el precio del abono."
+        tags: [social, community, meeting]
+
+normative_tags: [community_duty]

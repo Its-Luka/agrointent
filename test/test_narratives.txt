@@ -1,0 +1,21 @@
+# tests/test_narratives.txt
+# Una narrativa por línea (líneas que empiezan con # se ignoran).
+# Pensadas para el Estado de México, mezclando cultivos/riesgos que el
+# motor SÍ reconoce (maíz, frijol, café, sequía, inundación, plaga) con
+# un par de casos de vocabulario regional que el motor NO simula todavía
+# (trigo, papa, helada) -- estos últimos sirven para probar el chequeo de
+# crop_type_fallback_risk en evaluate.py.
+La sequía de tres semanas dañó la milpa de maíz de la familia, que ahora busca apoyo para recuperar el ciclo de siembra.
+Una plaga atacó el frijol después de la cosecha, así que la comunidad organiza tequio para controlarla.
+La inundación dejó la parcela en barbecho forzado y se perdieron las herramientas de riego.
+Con la deuda del año pasado vencida, la familia busca un préstamo antes de que embarguen el ejido.
+El coyote ofreció un precio muy bajo por la cosecha de café, así que buscan otro comprador en el mercado.
+Necesitan semillas de maíz y agua para preparar la tierra antes de que empiece el temporal.
+El jornalero se enfermó y la familia pide ayuda de salud antes de seguir con la siembra.
+La comunidad organiza una reunión para coordinar la colaboración de tequio en la próxima cosecha.
+Después de meses sin ingresos, buscan trabajo alternativo mientras se recupera la milpa.
+Con el crédito agotado, piden asesoría y lista de precios antes de vender el cultivo de plátano.
+Perdieron parte del cultivo de trigo por una helada tardía y no saben si el seguro cubre esa pérdida.
+La familia quiere sembrar papa este ciclo en lugar de maíz porque el precio ha subido en el mercado local.
+Tras la plaga en el arroz, piden pesticida y evalúan cambiar de parcela para la próxima siembra.
+El agostadero se secó y el ganado necesita agua antes de que empeore la sequía.

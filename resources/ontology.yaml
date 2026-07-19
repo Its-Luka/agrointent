@@ -1,0 +1,36 @@
+entities:
+  maiz:
+    synonyms: [maiz, maíz, milpa, elote, grano]
+    problems: [sequía, helada, granizada, plagas, bajos_rendimientos]
+    actions: [preparar, sembrar, regar, cosechar, vender]
+    resources: [agua, semillas, fertilizante, apoyo, crédito]
+
+  ganado:
+    synonyms: [ganado, vacas, reses, bovinos, vacunos, animales, becerros]
+    problems: [falta_de_agua, enfermedad, plaga, pasto_escaso]
+    actions: [hidratar, alimentar, vacunar, tratar, trasladar]
+    resources: [agua, forraje, tanques, cisternas, apoyo]
+
+  frijol:
+    synonyms: [frijol, beans, frijoles]
+    problems: [sequía, plagas, bajos_rendimientos, precios_altos]
+    actions: [sembrar, regar, cosechar, vender]
+    resources: [agua, semillas, fertilizante, apoyo]
+
+  flores:
+    synonyms: [flores, floricultura, vivero, ornamentales]
+    problems: [costos_altos, fertilizante_caro, gasolina_cara]
+    actions: [producir, vender, reducir_costos]
+    resources: [fertilizante, gasolina, logística, apoyo]
+
+  cafe:
+    synonyms: [cafe, café, cafetal, coffee]
+    problems: [sequía, plagas, precios_bajos]
+    actions: [cosechar, secar, vender]
+    resources: [agua, mano_de_obra, apoyo]
+
+  agua:
+    synonyms: [agua, pipa, pipas, cisterna, cisternas, tanque, tanques, pozo, pozos, riego]
+    problems: [escasez, sequía, costo_alto]
+    actions: [almacenar, distribuir, captar, bombear]
+    resources: [pipas, tanques, cisternas, bombas, apoyo]

@@ -1,0 +1,59 @@
+# PlanSpec: pay_debts_plan_v1
+# Equivalent to PayDebtsTask.java
+id: pay_debts_plan_v1
+version: "1.0"
+description: "Process loan payment at the bank."
+
+preconditions:
+  - "belief.get('money') >= belief.get('loan_amount_to_pay')"
+
+steps:
+  - id: consume_pay_debts_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 60
+      description: "Time spent paying debts (1 hour)"
+
+  - id: notify_bank_payment
+    action: send_event
+    args:
+      to: BankOffice
+      type: PAY_LOAN_TERM
+      payload:
+        agent_id: "{agent_id}"
+        amount: "{belief.loan_amount_to_pay}"
+        sim_time: "{sim_time}"
+
+  - id: consume_debt_money
+    action: consume_resource
+    args:
+      key: money
+      amount: "{belief.loan_amount_to_pay}"
+      description: "Pay the loan amount"
+
+  - id: reset_debt_belief
+    action: update_belief
+    args:
+      key: loan_amount_to_pay
+      value: 0
+      description: "Clear the debt record"
+
+  - id: record_payment_episode
+    action: emit_episode
+    args:
+      text: "He pagado mis deudas al banco. ¡Qué alivio!"
+      tags: [debt, money, obligation, bank]
+
+  - id: set_executed_flag
+    action: update_belief
+    args:
+      key: already_executed_pay_debts
+      value: true
+
+on_failure:
+  - id: log_payment_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "pay_debts_plan failed for agent {agent_id}"

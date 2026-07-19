@@ -1,0 +1,28 @@
+# PlanSpec: community_meeting_plan_v1
+# A simple plan that spends time and records an episode.
+
+id: community_meeting_plan_v1
+version: "1.0"
+description: "Participate in a community gathering."
+
+steps:
+  - id: consume_meeting_time
+    action: consume_resource
+    args:
+      key: "time_left_on_day"
+      amount: 180 # 3 hours
+
+  - id: boost_social
+    action: increment_belief
+    args:
+      key: "social_affinity"
+      amount: 0.02
+
+  - id: record_meeting_episode
+    action: emit_episode
+    args:
+      text: "La reunión fue productiva. Me siento más conectado con mis vecinos."
+      tags: [social, community]
+
+on_timeout: []
+on_failure: []

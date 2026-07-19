@@ -1,0 +1,36 @@
+# PlanSpec: seek_purpose_plan_v1
+# Equivalent to SeekPurposeTask.java
+id: seek_purpose_plan_v1
+version: "1.0"
+description: "Establish the agent's purpose as a farmer."
+
+preconditions:
+  - "belief.get('purpose') == null || belief.get('purpose') == ''"
+
+steps:
+  - id: consume_seek_purpose_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      amount: 720
+      description: "Time spent seeking purpose (12 hours)"
+
+  - id: set_purpose_to_farmer
+    action: update_belief
+    args:
+      key: purpose
+      value: "farmer"
+      description: "Become a farmer"
+
+  - id: record_purpose_episode
+    action: emit_episode
+    args:
+      text: "He decidido mi propósito: seré un agricultor."
+      tags: [purpose, survival, life_goal]
+
+on_failure:
+  - id: log_seek_purpose_failure
+    action: log_audit
+    args:
+      level: WARN
+      message: "seek_purpose_plan failed for agent {agent_id}"

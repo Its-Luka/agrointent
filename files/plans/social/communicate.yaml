@@ -1,0 +1,13 @@
+# PlanSpec: communicate_plan_v1
+# Placeholder for CommunicateTask.java
+
+id: communicate_plan_v1
+version: "1.0"
+description: "Communicate with neighbors."
+
+steps:
+  - id: log_comm
+    action: log_audit
+    args:
+      level: INFO
+      message: "Agent {agent_id} is communicating."

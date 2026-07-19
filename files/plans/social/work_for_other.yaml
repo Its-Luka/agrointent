@@ -1,0 +1,30 @@
+# PlanSpec: work_for_other_plan_v1
+# Equivalent to WorkForOtherTask.java execution
+# Fulfills labor contract days for another peasant family.
+
+id: work_for_other_plan_v1
+version: "1.0"
+description: "Work for another peasant family under a labor contract."
+
+steps:
+  - id: consume_work_time
+    action: consume_resource
+    args:
+      key: time_left_on_day
+      time_key: WorkForOtherTask
+
+  - id: emit_work_emotion
+    action: emit_emotion
+    args:
+      subject: FAMILY
+      predicate: WORK
+      object: MONEY
+
+  - id: record_episode
+    action: emit_episode
+    args:
+      text: "He trabajado hoy en la finca de otro agricultor. El trabajo honrado nos ayuda a generar ingresos adicionales."
+      tags: [social, labor, contract]
+
+on_timeout: []
+on_failure: []

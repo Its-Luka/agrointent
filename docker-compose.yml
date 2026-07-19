@@ -1,0 +1,14 @@
+
+services:
+  agrointent:
+    build: .
+    container_name: agrointent_mvp
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./outputs:/app/outputs
+      - ./knowledge:/app/knowledge
+      - ./prompts:/app/prompts
+    restart: unless-stopped
